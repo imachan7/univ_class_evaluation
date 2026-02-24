@@ -1,0 +1,2 @@
+# univ_class_evaluation
+Efreiの講義で作成するwebサービスのリポジトリです
