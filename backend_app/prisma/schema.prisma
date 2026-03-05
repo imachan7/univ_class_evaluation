@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Lecture {
+  id       Int       @id @default(autoincrement())
+  lec_name String
+  teacher  String
+  day      Int
+  period   Int
+  grade    Int
+  term     Int       // 0=前期, 1=後期
+  evals    LecEval[]
+}
+
+model LecEval {
+  id              Int      @id @default(autoincrement())
+  lecture_id      Int
+  user_id         Int
+  attendance      Int      // 出席必要か
+  assignments     Int      // 課題は多いか
+  exam_difficulty Int      // テスト・レポートの難しさ
+  clarity         Int      // わかりやすさ
+  interest        Int      // 面白さ
+  easy_credit     Int      // 単位の取りやすさ（総合）
+  comment         String?
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+
+  lecture         Lecture  @relation(fields: [lecture_id], references: [id])
+  user            User     @relation(fields: [user_id], references: [user_id])
+
+  @@unique([lecture_id, user_id])
+}
+
+model User {
+  user_id       Int       @id @default(autoincrement())
+  email         String    @unique
+  password_hash String
+  name          String
+  grade         Int
+  course        Int
+  evals         LecEval[]
+}
