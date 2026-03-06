@@ -2,6 +2,9 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRouter from "./routes/auth";
+import lecturesRouter from "./routes/lectures";
+import evalsRouter from "./routes/evals";
+import usersRouter from "./routes/users";
 
 dotenv.config();
 
@@ -30,6 +33,9 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/auth", authRouter);
+app.use("/lectures", lecturesRouter);
+app.use("/lectures/:id/evals", evalsRouter);
+app.use("/users", usersRouter);
 
 // グローバルエラーハンドラ
 app.use((err: Error & { status?: number }, req: express.Request, res: express.Response, _next: express.NextFunction) => {
