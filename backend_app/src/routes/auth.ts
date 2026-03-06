@@ -29,7 +29,8 @@ router.post('/signup', async (req: Request, res: Response) => {
     });
 
     res.status(201).json({ message: '登録完了', user_id: user.user_id });
-  } catch {
+  } catch (err) {
+    console.error('[signup error]', err);
     res.status(500).json({ message: 'サーバーエラーが発生しました' });
   }
 });
@@ -68,7 +69,8 @@ router.post('/login', async (req: Request, res: Response) => {
     );
 
     res.json({ token, user_id: user.user_id, name: user.name });
-  } catch {
+  } catch (err) {
+    console.error('[login error]', err);
     res.status(500).json({ message: 'サーバーエラーが発生しました' });
   }
 });

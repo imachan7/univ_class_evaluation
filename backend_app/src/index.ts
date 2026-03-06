@@ -19,7 +19,7 @@ app.use(
       if (!origin) return callback(null, true);
       if (allowedOrigins.length === 0) return callback(null, true);
       if (allowedOrigins.includes(origin)) return callback(null, true);
-      return callback(new Error("Not allowed by CORS"));
+      return callback(Object.assign(new Error("Not allowed by CORS"), { status: 403 }));
     },
   })
 );
@@ -32,9 +32,11 @@ app.get("/health", (req, res) => {
 app.use("/auth", authRouter);
 
 // グローバルエラーハンドラ
-app.use((err: Error, req: express.Request, res: express.Response, _next: express.NextFunction) => {
+app.use((err: Error & { status?: number }, req: express.Request, res: express.Response, _next: express.NextFunction) => {
   console.error(err.stack);
-  res.status(500).json({ message: 'サーバーエラーが発生しました' });
+  const status = err.status ?? 500;
+  const message = status === 403 ? 'このオリジンからのアクセスは許可されていません' : 'サーバーエラーが発生しました';
+  res.status(status).json({ message });
 });
 
 app.listen(PORT, () => {

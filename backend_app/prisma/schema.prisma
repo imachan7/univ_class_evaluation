@@ -8,6 +8,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
+  // url は prisma.config.ts の datasource.url で管理（Prisma 7 仕様）
 }
 
 model Lecture {
