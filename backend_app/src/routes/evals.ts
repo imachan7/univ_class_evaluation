@@ -84,7 +84,7 @@ router.post('/', authMiddleware, async (req: AuthRequest, res: Response) => {
         clarity: Number(clarity),
         interest: Number(interest),
         easy_credit: Number(easy_credit),
-        comment: comment ?? null,
+        comment: (typeof comment === 'string' ? comment : null),
       },
     });
 
@@ -134,7 +134,7 @@ router.put('/', authMiddleware, async (req: AuthRequest, res: Response) => {
         ...(clarity !== undefined && { clarity: Number(clarity) }),
         ...(interest !== undefined && { interest: Number(interest) }),
         ...(easy_credit !== undefined && { easy_credit: Number(easy_credit) }),
-        ...(comment !== undefined && { comment }),
+        ...(comment !== undefined && { comment: (typeof comment === 'string' ? comment : null) }),
       },
     });
 

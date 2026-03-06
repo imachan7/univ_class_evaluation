@@ -3,17 +3,35 @@ import prisma from '../lib/prisma';
 
 const router = Router();
 
+// クエリパラメータを安全に整数へ変換するヘルパー
+function parseIntParam(param: unknown): number | null | undefined {
+  if (param === undefined) return undefined;
+  if (Array.isArray(param) || typeof param !== 'string' || param.trim() === '') return null;
+  const n = Number(param.trim());
+  return Number.isInteger(n) ? n : null;
+}
+
 // 講義一覧取得（クエリパラメータで絞り込み可）
 router.get('/', async (req: Request, res: Response) => {
   try {
     const { day, period, grade, term } = req.query;
 
+    const parsedDay    = parseIntParam(day);
+    const parsedPeriod = parseIntParam(period);
+    const parsedGrade  = parseIntParam(grade);
+    const parsedTerm   = parseIntParam(term);
+
+    if (parsedDay === null || parsedPeriod === null || parsedGrade === null || parsedTerm === null) {
+      res.status(400).json({ message: 'クエリパラメータが不正です' });
+      return;
+    }
+
     const lectures = await prisma.lecture.findMany({
       where: {
-        ...(day !== undefined && { day: Number(day) }),
-        ...(period !== undefined && { period: Number(period) }),
-        ...(grade !== undefined && { grade: Number(grade) }),
-        ...(term !== undefined && { term: Number(term) }),
+        ...(parsedDay    !== undefined && { day:    parsedDay }),
+        ...(parsedPeriod !== undefined && { period: parsedPeriod }),
+        ...(parsedGrade  !== undefined && { grade:  parsedGrade }),
+        ...(parsedTerm   !== undefined && { term:   parsedTerm }),
       },
       orderBy: [{ day: 'asc' }, { period: 'asc' }],
     });

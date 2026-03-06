@@ -41,10 +41,12 @@ const lectures = [
 ];
 
 async function main() {
-  console.log('既存の講義データを削除中...');
-  await prisma.lecture.deleteMany();
-  console.log('シードデータを投入中...');
-  await prisma.lecture.createMany({ data: lectures });
+  console.log('既存データを削除中...');
+  await prisma.$transaction(async (tx) => {
+    await tx.lecEval.deleteMany();
+    await tx.lecture.deleteMany();
+    await tx.lecture.createMany({ data: lectures });
+  });
   console.log(`${lectures.length} 件の講義データを投入しました`);
 }
 
