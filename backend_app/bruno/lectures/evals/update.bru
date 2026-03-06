@@ -1,0 +1,22 @@
+meta {
+  name: 評価編集
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{baseUrl}}/lectures/1/evals
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "clarity": 4,
+    "comment": "コメントを更新しました"
+  }
+}
