@@ -12,7 +12,10 @@ router.post('/signup', async (req: Request, res: Response) => {
     const grade = Number(req.body.grade);
     const course = Number(req.body.course);
 
-    if (!email || !password || !name || isNaN(grade) || isNaN(course)) {
+    const isValidGrade = Number.isInteger(grade) && grade >= 1;
+    const isValidCourse = Number.isInteger(course) && course >= 1;
+
+    if (!email || !password || !name || !isValidGrade || !isValidCourse) {
       res.status(400).json({ message: '必須項目が不足しているか、型が正しくありません' });
       return;
     }
