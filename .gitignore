@@ -140,4 +140,4 @@ vite.config.ts.timestamp-*
 
 # Personal working folder
 hayato/*
-!hayato/README.md
+

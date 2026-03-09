@@ -1,20 +1,121 @@
-<!-- ホーム画面のhtml -->
-<!-- 時間割の表示 -->
-<!-- 時間割上を押すとその時間に存在する授業を確認することができる -->
-<!-- 時間割を押すとperiod_class.htmlへ遷移-->
+<!-- ホーム画面: 英語UIで時間割のガワを作成 -->
+<!-- 各セルはクリック可能で period_classes.html に遷移 -->
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charest="utf-8">
-        <title>Home</title>
-    </head>
-    <body>
-        <h1>Schedule</h1>
+<html lang="en">
 
-        <!-- テスト用に生成-->
-        <!-- 時間割は表にして表示？-->
-        <p>Mon</p>
-        <a href="period_classes.html">1</a>
-    </body>
-    
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Timetable</title>
+    <link rel="stylesheet" href="../css/calendar_home.css">
+  </head>
+
+<body>
+    <header>
+        <h1>Schedule</h1>
+        <p>Select a day and period to view available lectures.</p>
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="period_classes.html">Lecture Candidates</a></li>
+                <li><a href="detail_class.html">Lecture Detail</a></li>
+                <li><a href="review.html">Write Review</a></li>
+                <li><a href="feedback.html">View Reviews</a></li>
+            </ul>
+        </nav>
+        <hr>
+    </header>
+
+    <main>
+        <section>
+            <h2>Class Grid (Mon-Fri / Period 1-5)</h2>
+        <table class="calendar-home" border="1">
+                <caption>Click any slot to check lecture candidates</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Period</th>
+                        <th scope="col">Monday</th>
+                        <th scope="col">Tuesday</th>
+                        <th scope="col">Wednesday</th>
+                        <th scope="col">Thursday</th>
+                        <th scope="col">Friday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Period 1</th>
+                        <td><a href="period_classes.html?day=monday&period=1">No class selected - View candidates</a>
+                        </td>
+                        <td><a href="period_classes.html?day=tuesday&period=1">No class selected - View candidates</a>
+                        </td>
+                        <td><a href="period_classes.html?day=wednesday&period=1">No class selected - View candidates</a>
+                        </td>
+                        <td><a href="period_classes.html?day=thursday&period=1">No class selected - View candidates</a>
+                        </td>
+                        <td><a href="period_classes.html?day=friday&period=1">No class selected - View candidates</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Period 2</th>
+                        <td><a href="period_classes.html?day=monday&period=2">No class selected - View candidates</a>
+                        </td>
+                        <td><a href="period_classes.html?day=tuesday&period=2">No class selected - View candidates</a>
+                        </td>
+                        <td><a href="period_classes.html?day=wednesday&period=2">No class selected - View candidates</a>
+                        </td>
+                        <td><a href="period_classes.html?day=thursday&period=2">No class selected - View candidates</a>
+                        </td>
+                        <td><a href="period_classes.html?day=friday&period=2">No class selected - View candidates</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Period 3</th>
+                        <td><a href="period_classes.html?day=monday&period=3">No class selected - View candidates</a>
+                        </td>
+                        <td><a href="period_classes.html?day=tuesday&period=3">No class selected - View candidates</a>
+                        </td>
+                        <td><a href="period_classes.html?day=wednesday&period=3">No class selected - View candidates</a>
+                        </td>
+                        <td><a href="period_classes.html?day=thursday&period=3">No class selected - View candidates</a>
+                        </td>
+                        <td><a href="period_classes.html?day=friday&period=3">No class selected - View candidates</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Period 4</th>
+                        <td><a href="period_classes.html?day=monday&period=4">No class selected - View candidates</a>
+                        </td>
+                        <td><a href="period_classes.html?day=tuesday&period=4">No class selected - View candidates</a>
+                        </td>
+                        <td><a href="period_classes.html?day=wednesday&period=4">No class selected - View candidates</a>
+                        </td>
+                        <td><a href="period_classes.html?day=thursday&period=4">No class selected - View candidates</a>
+                        </td>
+                        <td><a href="period_classes.html?day=friday&period=4">No class selected - View candidates</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Period 5</th>
+                        <td><a href="period_classes.html?day=monday&period=5">No class selected - View candidates</a>
+                        </td>
+                        <td><a href="period_classes.html?day=tuesday&period=5">No class selected - View candidates</a>
+                        </td>
+                        <td><a href="period_classes.html?day=wednesday&period=5">No class selected - View candidates</a>
+                        </td>
+                        <td><a href="period_classes.html?day=thursday&period=5">No class selected - View candidates</a>
+                        </td>
+                        <td><a href="period_classes.html?day=friday&period=5">No class selected - View candidates</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <hr>
+        <p>Target scope: Nagoya Institute of Technology, Information Engineering, Year 3.</p>
+    </footer>
+</body>
+
 </html>

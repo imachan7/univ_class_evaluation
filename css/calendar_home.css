@@ -1,0 +1,67 @@
+/* Calendar-only styling for the Home timetable.
+   Apply to a table like: <table class="calendar-home"> */
+
+.calendar-home {
+  width: 100%;
+  max-width: 980px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  border: 1px solid #c9d2e0;
+  background-color: #ffffff;
+}
+
+.calendar-home caption {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1f2937;
+  text-align: left;
+}
+
+.calendar-home thead th {
+  padding: 12px 8px;
+  border: 1px solid #d7deea;
+  background-color: #eef3fb;
+  color: #1b365d;
+  font-size: 0.95rem;
+}
+
+.calendar-home tbody th {
+  padding: 10px 8px;
+  border: 1px solid #d7deea;
+  background-color: #f7f9fc;
+  color: #334155;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.calendar-home td {
+  min-height: 72px;
+  padding: 8px;
+  border: 1px solid #d7deea;
+  vertical-align: middle;
+  background-color: #ffffff;
+}
+
+.calendar-home td a {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #d5dded;
+  background-color: #f8fbff;
+  color: #0f172a;
+  line-height: 1.35;
+  text-decoration: none;
+  font-size: 0.88rem;
+}
+
+.calendar-home td a:hover,
+.calendar-home td a:focus-visible {
+  border-color: #1d4ed8;
+  background-color: #eaf1ff;
+  color: #0b3aa8;
+}
+
+.calendar-home td a:active {
+  background-color: #dbe7ff;
+}
