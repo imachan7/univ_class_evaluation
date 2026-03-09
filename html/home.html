@@ -3,21 +3,53 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | Timetable</title>
     <link rel="stylesheet" href="../css/calendar_home.css">
-  </head>
+    <script>
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const hasFixedQuery = params.get("term") === "0" && params.get("grade") === "3";
+
+            // Step 1: query is mandatory
+            if (!hasFixedQuery) {
+                const url = new URL(window.location.href);
+                url.search = "?term=0&grade=3";
+                window.location.replace(url.toString());
+                return;
+            }
+
+            // Step 2: keep displayed URL in the requested form without reloading
+            if (window.location.pathname !== "/html/home.html") {
+                window.history.replaceState(null, "", "/html/home.html?term=0&grade=3");
+            }
+        })();
+    </script>
+</head>
 
 <body>
     <header>
         <h1>Schedule</h1>
         <p>Select a day and period to view available lectures.</p>
+        <div style="text-align: right;">
+            <form id="home-filter-form" aria-label="Department and grade filter">
+                <label for="department-select">Department</label>
+                <select id="department-select" name="department" disabled>
+                    <option value="information_engineering" selected>Information Engineering (Fixed)</option>
+                </select>
+                <label for="grade-select">Grade</label>
+                <select id="grade-select" name="grade" disabled>
+                    <option value="3" selected>Year 3 (Fixed)</option>
+                </select>
+                <button type="submit" disabled>Apply</button>
+            </form>
+        </div>
         <nav aria-label="Main navigation">
             <ul>
-                <li><a href="home.html">Home</a></li>
-                <li><a href="period_classes.html">Lecture Candidates</a></li>
+                <li><a href="home.html?term=0&grade=3">Home</a></li>
+                <li><a href="period.html">Lecture Candidates</a></li>
                 <li><a href="detail_class.html">Lecture Detail</a></li>
                 <li><a href="review.html">Write Review</a></li>
                 <li><a href="feedback.html">View Reviews</a></li>
@@ -29,7 +61,8 @@
     <main>
         <section>
             <h2>Class Grid (Mon-Fri / Period 1-5)</h2>
-        <table class="calendar-home" border="1">
+            <p id="calendar-status">Preparing lecture data...</p>
+            <table class="calendar-home" border="1">
                 <caption>Click any slot to check lecture candidates</caption>
                 <thead>
                     <tr>
@@ -44,67 +77,67 @@
                 <tbody>
                     <tr>
                         <th scope="row">Period 1</th>
-                        <td><a href="period_classes.html?day=monday&period=1">No class selected - View candidates</a>
+                        <td><a href="period.html?day=monday&period=1">No class selected - View candidates</a>
                         </td>
-                        <td><a href="period_classes.html?day=tuesday&period=1">No class selected - View candidates</a>
+                        <td><a href="period.html?day=tuesday&period=1">No class selected - View candidates</a>
                         </td>
-                        <td><a href="period_classes.html?day=wednesday&period=1">No class selected - View candidates</a>
+                        <td><a href="period.html?day=wednesday&period=1">No class selected - View candidates</a>
                         </td>
-                        <td><a href="period_classes.html?day=thursday&period=1">No class selected - View candidates</a>
+                        <td><a href="period.html?day=thursday&period=1">No class selected - View candidates</a>
                         </td>
-                        <td><a href="period_classes.html?day=friday&period=1">No class selected - View candidates</a>
+                        <td><a href="period.html?day=friday&period=1">No class selected - View candidates</a>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">Period 2</th>
-                        <td><a href="period_classes.html?day=monday&period=2">No class selected - View candidates</a>
+                        <td><a href="period.html?day=monday&period=2">No class selected - View candidates</a>
                         </td>
-                        <td><a href="period_classes.html?day=tuesday&period=2">No class selected - View candidates</a>
+                        <td><a href="period.html?day=tuesday&period=2">No class selected - View candidates</a>
                         </td>
-                        <td><a href="period_classes.html?day=wednesday&period=2">No class selected - View candidates</a>
+                        <td><a href="period.html?day=wednesday&period=2">No class selected - View candidates</a>
                         </td>
-                        <td><a href="period_classes.html?day=thursday&period=2">No class selected - View candidates</a>
+                        <td><a href="period.html?day=thursday&period=2">No class selected - View candidates</a>
                         </td>
-                        <td><a href="period_classes.html?day=friday&period=2">No class selected - View candidates</a>
+                        <td><a href="period.html?day=friday&period=2">No class selected - View candidates</a>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">Period 3</th>
-                        <td><a href="period_classes.html?day=monday&period=3">No class selected - View candidates</a>
+                        <td><a href="period.html?day=monday&period=3">No class selected - View candidates</a>
                         </td>
-                        <td><a href="period_classes.html?day=tuesday&period=3">No class selected - View candidates</a>
+                        <td><a href="period.html?day=tuesday&period=3">No class selected - View candidates</a>
                         </td>
-                        <td><a href="period_classes.html?day=wednesday&period=3">No class selected - View candidates</a>
+                        <td><a href="period.html?day=wednesday&period=3">No class selected - View candidates</a>
                         </td>
-                        <td><a href="period_classes.html?day=thursday&period=3">No class selected - View candidates</a>
+                        <td><a href="period.html?day=thursday&period=3">No class selected - View candidates</a>
                         </td>
-                        <td><a href="period_classes.html?day=friday&period=3">No class selected - View candidates</a>
+                        <td><a href="period.html?day=friday&period=3">No class selected - View candidates</a>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">Period 4</th>
-                        <td><a href="period_classes.html?day=monday&period=4">No class selected - View candidates</a>
+                        <td><a href="period.html?day=monday&period=4">No class selected - View candidates</a>
                         </td>
-                        <td><a href="period_classes.html?day=tuesday&period=4">No class selected - View candidates</a>
+                        <td><a href="period.html?day=tuesday&period=4">No class selected - View candidates</a>
                         </td>
-                        <td><a href="period_classes.html?day=wednesday&period=4">No class selected - View candidates</a>
+                        <td><a href="period.html?day=wednesday&period=4">No class selected - View candidates</a>
                         </td>
-                        <td><a href="period_classes.html?day=thursday&period=4">No class selected - View candidates</a>
+                        <td><a href="period.html?day=thursday&period=4">No class selected - View candidates</a>
                         </td>
-                        <td><a href="period_classes.html?day=friday&period=4">No class selected - View candidates</a>
+                        <td><a href="period.html?day=friday&period=4">No class selected - View candidates</a>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">Period 5</th>
-                        <td><a href="period_classes.html?day=monday&period=5">No class selected - View candidates</a>
+                        <td><a href="period.html?day=monday&period=5">No class selected - View candidates</a>
                         </td>
-                        <td><a href="period_classes.html?day=tuesday&period=5">No class selected - View candidates</a>
+                        <td><a href="period.html?day=tuesday&period=5">No class selected - View candidates</a>
                         </td>
-                        <td><a href="period_classes.html?day=wednesday&period=5">No class selected - View candidates</a>
+                        <td><a href="period.html?day=wednesday&period=5">No class selected - View candidates</a>
                         </td>
-                        <td><a href="period_classes.html?day=thursday&period=5">No class selected - View candidates</a>
+                        <td><a href="period.html?day=thursday&period=5">No class selected - View candidates</a>
                         </td>
-                        <td><a href="period_classes.html?day=friday&period=5">No class selected - View candidates</a>
+                        <td><a href="period.html?day=friday&period=5">No class selected - View candidates</a>
                         </td>
                     </tr>
                 </tbody>
@@ -116,6 +149,7 @@
         <hr>
         <p>Target scope: Nagoya Institute of Technology, Information Engineering, Year 3.</p>
     </footer>
+    <script src="../js/home.js?v=20260312"></script>
 </body>
 
 </html>
