@@ -50,4 +50,5 @@ model User {
   grade         Int
   course        Int
   evals         LecEval[]
+  prog_exp      Int @default(0)
 }
