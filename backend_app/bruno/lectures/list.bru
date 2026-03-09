@@ -1,0 +1,18 @@
+meta {
+  name: 講義一覧取得
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/lectures
+  body: none
+  auth: none
+}
+
+query {
+  ~term: 0
+  ~day: 1
+  ~period: 1
+  ~grade: 3
+}
