@@ -45,8 +45,10 @@ async function main() {
   await prisma.$transaction(async (tx) => {
     await tx.lecEval.deleteMany();
     await tx.lecture.deleteMany();
-    await tx.lecture.createMany({ data: lectures });
   });
+  // SQLiteのautoincrement連番をリセット
+  await prisma.$executeRawUnsafe(`DELETE FROM sqlite_sequence WHERE name='Lecture'`);
+  await prisma.lecture.createMany({ data: lectures });
   console.log(`${lectures.length} 件の講義データを投入しました`);
 }
 
