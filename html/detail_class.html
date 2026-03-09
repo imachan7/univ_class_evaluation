@@ -1,0 +1,47 @@
+<!-- 各授業詳細のhtml -->
+<!-- 講義名の表示，先生名の表示，評価を見るボタン，評価を行うボタン -->
+<!-- 評価を見るボタンを押すとreview.htmlへ遷移 -->
+<!-- 評価を行うボタンを押すとfeedback.htmlへ遷移 -->
+<!-- 戻るボタンを押すと-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Class Information</title>
+    </head>
+
+    <body>
+
+        <h1>Class Information</h1>
+
+        <!-- ロゴを押すとhome.htmlへ戻る -->
+        <a href="home.html">
+            <img src="../images/logo.png" alt="Logo of This App" width="120">
+        </a>
+
+        <br><br>
+
+        <!-- Backを押すと1つ前のページ（時間割ページなど）に戻る -->
+        <a href="period_classes.html">Back</a>
+
+        <hr>
+
+        <!-- 講義情報 -->
+        <!-- 授業の詳細情報を表示 -->
+        <h2 id="lectureName">Class Name</h2>
+        <p id="teacherName">Teacher's Name</p>
+
+        <hr>
+
+        <!-- ボタンエリア -->
+        <a href="review.html">
+            <button>View Evaluation</button>
+        </a>
+
+        <a href="feedback.html">
+            <button>Evaluate Class</button>
+        </a>
+
+    </body>
+    
+</html>
