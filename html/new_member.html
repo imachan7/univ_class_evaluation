@@ -12,17 +12,45 @@
     <body>
         <h1>Member Registration</h1>
 
-        <p>Name</p>
-        <!-- 名前を入力するフォーム -->
+        <p>Email</p>
+        <!-- Emailアドレス-->
+        <input id="new_member_emailInput" type="text" placeholder="Email" />
+        
+        <p>Pass Word</p>
+        <!-- パスワードを入力するフォーム -->
+        <input id="new_member_passwordInput" type="text" placeholder="Password" />
+
+        <p>User Id</p>
+        <!-- ユーザIDを入力するフォーム -->
         <input id="new_member_nameInput" type="text" placeholder="Name" />
         
+        <p>NickName</p>
+        <!-- ニックネームを入力するフォーム -->
+        <input id="new_member_nicknameInput" type="text" placeholder="NickName" />
 
-        <p>Year of Admission</p>
+        <!-- 学年を選択するフォーム -->
+        <p>Grade</p>
+        <select id="grade" name="grade">
+            <option value="">--Select--</option>
+            <option value="3">Year 3</option>
+        </select>
         
-        <p>Field</p>
-        
+        <!-- 学科を選択するフォーム -->
+        <p>Course</p>
+        <select id="course" name="course">
+            <option value="">--Select--</option>
+            <option value="1">Informataion Engineering</option>
+        </select>
+
+        <!-- プログラミング経験を選択するフォーム -->
         <p>Programming Experience</p>
-        
+        <select id="programming_experience" name="programming_experience">
+            <option value="">--Select--</option>
+            <option value="1">~ 1year</option>
+            <option value="2">1year ~ 3year</option>
+            <option value="3">3year ~</option>
+        </select>
+
         <!-- 前のページ(login.html)に戻るボタン-->
         <button id="new_member_back_button">Back</button>
         
