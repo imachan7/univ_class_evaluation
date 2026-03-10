@@ -1,4 +1,5 @@
 const PERIOD_API_BASE_URL = "http://localhost:3000";
+const PERIOD_POPUP_CONTEXT_KEY = "periodPopupContext";
 
 const DAY_NAME_TO_NUMBER = {
   monday: 1,
@@ -8,17 +9,19 @@ const DAY_NAME_TO_NUMBER = {
   friday: 5,
 };
 
-const DAY_NUMBER_TO_NAME = {
-  1: "Monday",
-  2: "Tuesday",
-  3: "Wednesday",
-  4: "Thursday",
-  5: "Friday",
-};
-
 function parseNumericOrDefault(value, fallback) {
   const n = Number(value);
   return Number.isInteger(n) ? n : fallback;
+}
+
+function parseTermOrDefault(value) {
+  const term = parseNumericOrDefault(value, 0);
+  return term === 1 ? 1 : 0;
+}
+
+function parsePeriodOrDefault(value) {
+  const period = parseNumericOrDefault(value, 1);
+  return period >= 1 && period <= 5 ? period : 1;
 }
 
 function parseDayParam(dayValue) {
@@ -31,18 +34,55 @@ function parseDayParam(dayValue) {
     return DAY_NAME_TO_NUMBER[lowered];
   }
 
-  return parseNumericOrDefault(dayValue, 1);
+  const day = parseNumericOrDefault(dayValue, 1);
+  return day >= 1 && day <= 5 ? day : 1;
+}
+
+function readStoredPopupContext() {
+  try {
+    const raw = localStorage.getItem(PERIOD_POPUP_CONTEXT_KEY);
+    if (!raw) {
+      return null;
+    }
+
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object") {
+      return null;
+    }
+
+    const day = parseDayParam(parsed.day);
+    const period = parsePeriodOrDefault(parsed.period);
+    const term = parseTermOrDefault(parsed.term);
+
+    return { day, period, term, grade: 3 };
+  } catch (error) {
+    console.warn("Failed to read period popup context:", error);
+    return null;
+  }
 }
 
 function getPeriodQueryParams() {
   const params = new URLSearchParams(window.location.search);
 
-  const day = parseDayParam(params.get("day"));
-  const period = parseNumericOrDefault(params.get("period"), 1);
-  const term = parseNumericOrDefault(params.get("term"), 0);
-  const grade = parseNumericOrDefault(params.get("grade"), 3);
+  const hasDay = params.has("day");
+  const hasPeriod = params.has("period");
 
-  return { day, period, term, grade };
+  if (hasDay && hasPeriod) {
+    const day = parseDayParam(params.get("day"));
+    const period = parsePeriodOrDefault(params.get("period"));
+    const term = parseTermOrDefault(params.get("term"));
+    return { day, period, term, grade: 3 };
+  }
+
+  const stored = readStoredPopupContext();
+  if (stored) {
+    return stored;
+  }
+
+  const day = parseDayParam(params.get("day"));
+  const period = parsePeriodOrDefault(params.get("period"));
+  const term = parseTermOrDefault(params.get("term"));
+  return { day, period, term, grade: 3 };
 }
 
 function setupBackButton(context) {
@@ -68,27 +108,15 @@ function setupBackButton(context) {
   });
 }
 
-function setContextLabel(context) {
-  const contextEl = document.getElementById("period-context");
-  if (!contextEl) {
-    return;
-  }
-
-  const dayName = DAY_NUMBER_TO_NAME[context.day] || "Unknown Day";
-  contextEl.textContent = `Selected slot: ${dayName}, Period ${context.period} (Term ${context.term}, Grade ${context.grade})`;
-}
-
 function renderLectureButtons(lectures, context) {
   const container = document.getElementById("lecture-buttons");
-  const status = document.getElementById("period-status");
-  if (!container || !status) {
+  if (!container) {
     return;
   }
 
   container.innerHTML = "";
 
   if (!lectures.length) {
-    status.textContent = "No lecture candidates found for this slot.";
     return;
   }
 
@@ -96,22 +124,17 @@ function renderLectureButtons(lectures, context) {
     const link = document.createElement("a");
     link.className = "lecture-button";
     link.href = `detail_class.html?lecture_id=${lecture.id}&day=${context.day}&period=${context.period}&term=${context.term}&grade=${context.grade}`;
-    link.textContent = lecture.lec_name || "Unnamed Lecture";
+
+    const lectureName = lecture.lec_name || "Unnamed Lecture";
+    const teacherName = lecture.teacher ? lecture.teacher : "TBA";
+    link.textContent = `${lectureName} / Instructor: ${teacherName}`;
     container.appendChild(link);
   }
-
-  status.textContent = `Loaded ${lectures.length} lecture candidate(s).`;
 }
 
 async function loadPeriodLectures() {
   const context = getPeriodQueryParams();
-  setContextLabel(context);
   setupBackButton(context);
-
-  const status = document.getElementById("period-status");
-  if (status) {
-    status.textContent = "Loading lectures...";
-  }
 
   try {
     const query = new URLSearchParams({
@@ -134,10 +157,6 @@ async function loadPeriodLectures() {
     renderLectureButtons(lectures, context);
   } catch (error) {
     console.error(error);
-    const statusEl = document.getElementById("period-status");
-    if (statusEl) {
-      statusEl.textContent = "Failed to load lecture candidates.";
-    }
   }
 }
 
