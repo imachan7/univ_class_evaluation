@@ -1,0 +1,27 @@
+meta {
+  name: 評価投稿
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/lectures/1/evals
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "attendance": 3,
+    "assignments": 2,
+    "exam_difficulty": 4,
+    "clarity": 5,
+    "interest": 4,
+    "easy_credit": 3,
+    "comment": "わかりやすい講義でした"
+  }
+}

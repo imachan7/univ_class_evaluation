@@ -1,0 +1,26 @@
+meta {
+  name: ログイン
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/auth/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "test@nitech.ac.jp",
+    "password": "password123"
+  }
+}
+
+script:post-response {
+  // レスポンスのtokenを環境変数に自動セット
+  const token = res.getBody()?.token;
+  if (token) {
+    bru.setVar("token", token);
+  }
+}
