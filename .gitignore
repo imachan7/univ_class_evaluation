@@ -143,3 +143,5 @@ hayato/*
 # Ignore local development database files
 dev.db
 *.db
+
+.vscode
