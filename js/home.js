@@ -193,19 +193,8 @@ async function loadCalendarLectures() {
     return;
   }
 
-  let status = document.getElementById("calendar-status");
-  if (!status) {
-    status = document.createElement("p");
-    status.id = "calendar-status";
-    table.parentElement?.insertBefore(status, table);
-  }
-
   const grade = DEFAULT_GRADE;
   const term = getCurrentTermFromUrl();
-
-  if (status) {
-    status.textContent = "Loading lectures from backend...";
-  }
 
   try {
     const query = new URLSearchParams({ grade: String(grade), term: String(term) });
@@ -240,15 +229,8 @@ async function loadCalendarLectures() {
         renderCellAnchor(anchor, lecturesInSlot, day, period, term, grade);
       });
     });
-
-    if (status) {
-      status.textContent = `Loaded ${lectures.length} lectures (grade=${grade}, term=${term}).`;
-    }
   } catch (error) {
     console.error(error);
-    if (status) {
-      status.textContent = "Failed to load lectures from backend. If you are using 127.0.0.1, switch to localhost and check CORS settings.";
-    }
   }
 }
 
