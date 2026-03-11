@@ -10,18 +10,20 @@
     </head>
     <body>
         <h1>COURSE SELECTION SYSTEM</h1>
+        <form id="login_form">
+            <p>Email</p>
+            <!-- Emailを入力するフォーム -->
+            <input id="login_emailInput" name="email" type="text" autocomplete="email" placeholder="Email" />
 
-        <p>Name</p>
-        <!-- 名前を入力するフォーム -->
-        <input id="login_nameInput" type="text" placeholder="Name" />
-        
-        <p>Password</p>
-        <!-- パスワードを入力するフォーム -->
-        <input id="login_passInput" type="password" placeholder="PassWord" />
-        <button id="login_signup_button">Sign Up</button>
-        <button id="login_login_button">Login</button>
-        
+            <p>Password</p>
+            <!-- パスワードを入力するフォーム -->
+            <input id="login_passInput" name="password" type="password" autocomplete="current-password" placeholder="PassWord" />
 
+            <button id="login_signup_button" type="button">Sign Up</button>
+            <button id="login_login_button" type="button">Login</button>
+        </form>
+
+        <link rel="icon" href="favicon.ico">
         <script src="../js_Hikari/login.js"></script>
     </body>
     
