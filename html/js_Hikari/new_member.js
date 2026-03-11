@@ -12,7 +12,8 @@ const programmingExperience = document.getElementById("programming_experience")
 
 //Backボタンを押したときの処理を追加
 function back() {
-    window.location.href = "login.html"
+    // プロジェクトルート配下の html/login.html へ戻る
+    window.location.href = './login.html'
 }
 
 // Registerボタンを押したときの処理を追加
@@ -51,7 +52,7 @@ async function register() {
         }
 
         alert('登録が完了しました。ログイン画面に移動します。');
-        window.location.href = 'login.html';
+        window.location.href = './login.html';
     } catch (err) {
         console.error('Signup error:', err);
         alert('サーバーに接続できませんでした');

@@ -5,6 +5,7 @@ const login_emailInput = document.getElementById("login_emailInput")
 const login_passInput = document.getElementById("login_passInput")
 
 function signup() {
+    // 常にプロジェクトルートの html フォルダを参照する絶対パスへ遷移
     window.location.href = "./new_member.html"
 }
 
@@ -37,7 +38,8 @@ async function login() {
 
         localStorage.setItem('jwt', token);
         console.log('ログイン成功');
-        window.location.href = 'home.html';
+        // 成功時は html フォルダの home.html へ遷移
+        window.location.href = './home.html';
 
     } catch (err) {
         console.error('Fetch error:', err);
