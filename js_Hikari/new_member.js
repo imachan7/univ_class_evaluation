@@ -27,6 +27,7 @@ function register() {
     const courseValue = course.value
     const programmingExperienceValue = programmingExperience.value
 
+    // テストでコンソール画面に表示
     console.log("email:", email)
     console.log("password:", password)
     console.log("name:", name)
