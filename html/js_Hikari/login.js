@@ -5,7 +5,7 @@ const login_emailInput = document.getElementById("login_emailInput")
 const login_passInput = document.getElementById("login_passInput")
 
 function signup() {
-    window.location.href = "../html/new_member.html"
+    window.location.href = "./new_member.html"
 }
 
 async function login() {
@@ -37,7 +37,7 @@ async function login() {
 
         localStorage.setItem('jwt', token);
         console.log('ログイン成功');
-        window.location.href = '../html/home.html';
+        window.location.href = 'home.html';
 
     } catch (err) {
         console.error('Fetch error:', err);

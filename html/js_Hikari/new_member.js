@@ -12,31 +12,50 @@ const programmingExperience = document.getElementById("programming_experience")
 
 //Backボタンを押したときの処理を追加
 function back() {
-    window.location.href = "../html/login.html"
+    window.location.href = "login.html"
 }
 
 // Registerボタンを押したときの処理を追加
 // 入力情報をデータベースに追加する処理はここに追加
-function register() {
+async function register() {
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+    const name = nameInput.value.trim();
+    const gradeValue = grade.value;
+    const courseValue = course.value;
+    const programmingExperienceValue = programmingExperience.value;
 
-    const email = emailInput.value
-    const password = passwordInput.value
-    const name = nameInput.value
-    const nickname = nicknameInput.value
-    const gradeValue = grade.value
-    const courseValue = course.value
-    const programmingExperienceValue = programmingExperience.value
+    if (!email || !password || !name || !gradeValue || !courseValue) {
+        alert('必須項目を入力してください');
+        return;
+    }
 
-    // テストでコンソール画面に表示
-    console.log("email:", email)
-    console.log("password:", password)
-    console.log("name:", name)
-    console.log("nickname:", nickname)
-    console.log("grade:", gradeValue)
-    console.log("course:", courseValue)
-    console.log("programming experience:", programmingExperienceValue)
-    
-    window.location.href = "../html/home.html"
+    try {
+        const res = await fetch('http://localhost:3000/auth/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email,
+                password,
+                name,
+                grade: Number(gradeValue),
+                course: Number(courseValue),
+                prog_exp: Number(programmingExperienceValue) || 0,
+            }),
+        });
+
+        const body = await res.json().catch(() => ({}));
+        if (!res.ok) {
+            alert(body.message || '登録に失敗しました');
+            return;
+        }
+
+        alert('登録が完了しました。ログイン画面に移動します。');
+        window.location.href = 'login.html';
+    } catch (err) {
+        console.error('Signup error:', err);
+        alert('サーバーに接続できませんでした');
+    }
 }
 
 new_member_back_button.addEventListener("click", back)
