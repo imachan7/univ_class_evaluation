@@ -2,7 +2,7 @@
 <!-- 戻るボタンを押すと-->
 
 <!DOCTYPE html>
-<html>
+<html lang="ja">
     <head>
         <meta charest="utf-8">
         <title>View Evaluation</title>
@@ -10,12 +10,38 @@
     <body>
         <h1>View Evaluation</h1>
         <!-- ここを押すとhome.htmlへ戻る-->
-        <a href="home.html"><img src="../images/logo.png" alt="Logo of This App"></a>
+        <a href="home.html"><img src="../images/logo.png" alt="Logo of This App" width="120"></a>
 
         <!-- Backを押すと1つ前のページに戻る-->
         <a href="detail_class.html">Back</a>
         
+
+        <!-- 追加版 -->
+        <div class="lecture-info">
+            <h2 id="lectureName">Loading class name...</h2>
+            <p id="teacherName">Loading teacher name...</p>
+        </div>
+        
+        <!-- 平均評価 -->
+        <div class="summary-box">
+            <h2>Average Evaluation</h2>
+            <p id="averageAttendance">Attendance Required : -</p>
+            <p id="averageAssignments">Assignments Amount : -</p>
+            <p id="averageExamDifficulty">Exam / Report Difficulty : -</p>
+            <p id="averageClarity">Clarity : -</p>
+            <p id="averageInterest">Interest : -</p>
+            <p id="averageEasyCredit">Easy Credit : -</p>
+        </div>
+
         <p>この授業は...</p>
+
+        <!-- 評価一覧表示エリア -->
+        <div id="evalList">
+            Loading...
+        </div>
+
+        <script src="../js_Ryota/review.js"></script>
+       
     </body>
     
 </html>
