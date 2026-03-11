@@ -1,5 +1,5 @@
 const params = new URLSearchParams(location.search);
-const lectureId = params.get("id");
+const lectureId = params.get("serial_num");
 
 const API = "http://localhost:3000";
 
