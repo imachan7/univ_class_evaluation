@@ -20,20 +20,22 @@ const feedbackLinkEl = document.getElementById("feedbackLink");
 const backLinkEl = document.getElementById("backLink");
 
 if (!lectureId) {
-  showError("講義IDが指定されていません。URLに ?id=数字 を付けてください。");
+  showError("URLに ?serial_num=講義ID を付けてください");
 } else {
-  reviewLinkEl.href = `review.html?id=${encodeURIComponent(lectureId)}`;
-  feedbackLinkEl.href = `feedback.html?id=${encodeURIComponent(lectureId)}`;
+  reviewLinkEl.href = `review.html?serial_num=${encodeURIComponent(lectureId)}`;
+  feedbackLinkEl.href = `feedback.html?serial_num=${encodeURIComponent(lectureId)}`;
   backLinkEl.href = "period_classes.html";
   loadLectureDetail();
 }
 
 async function loadLectureDetail() {
   try {
+    messageTextEl.classList.remove("error");
+
     const response = await fetch(`${API_BASE_URL}/lectures/${encodeURIComponent(lectureId)}`);
 
     if (!response.ok) {
-      throw new Error(`講義情報の取得に失敗しました (${response.status})`);
+      throw new Error("講義情報の取得に失敗しました");
     }
 
     const lecture = await response.json();
@@ -42,23 +44,36 @@ async function loadLectureDetail() {
     teacherNameEl.textContent = `Teacher : ${lecture.teacher ?? "-"}`;
 
     const metaParts = [];
-    if (typeof lecture.grade === "number") metaParts.push(`Grade : ${lecture.grade}`);
-    if (typeof lecture.term === "number") metaParts.push(`Term : ${lecture.term === 0 ? "First Semester" : "Second Semester"}`);
-    if (typeof lecture.day === "number") metaParts.push(`Day : ${formatDay(lecture.day)}`);
-    if (typeof lecture.period === "number") metaParts.push(`Period : ${lecture.period}`);
+
+    if (typeof lecture.grade === "number")
+      metaParts.push(`Grade : ${lecture.grade}`);
+
+    if (lecture.term === 0)
+      metaParts.push("Term : First");
+    else if (lecture.term === 1)
+      metaParts.push("Term : Second");
+
+    if (typeof lecture.day === "number")
+      metaParts.push(`Day : ${formatDay(lecture.day)}`);
+
+    if (typeof lecture.period === "number")
+      metaParts.push(`Period : ${lecture.period}`);
+
     lectureMetaEl.textContent = metaParts.join(" / ");
 
     const average = lecture.average ?? lecture.avg ?? null;
+
     if (average) {
       avgAttendanceEl.textContent = `Attendance Required : ${formatAverage(average.attendance)}`;
       avgAssignmentsEl.textContent = `Assignments Amount : ${formatAverage(average.assignments)}`;
-      avgExamDifficultyEl.textContent = `Exam / Report Difficulty : ${formatAverage(average.exam_difficulty)}`;
+      avgExamDifficultyEl.textContent = `Exam Difficulty : ${formatAverage(average.exam_difficulty)}`;
       avgClarityEl.textContent = `Clarity : ${formatAverage(average.clarity)}`;
       avgInterestEl.textContent = `Interest : ${formatAverage(average.interest)}`;
       avgEasyCreditEl.textContent = `Easy Credit : ${formatAverage(average.easy_credit)}`;
-      messageTextEl.textContent = "講義情報を読み込みました。";
+      messageTextEl.textContent = "講義情報を読み込みました";
     } else {
-      messageTextEl.textContent = "講義情報を読み込みました。平均評価はまだありません。";
+      resetAverageDisplay();
+      messageTextEl.textContent = "平均評価はまだありません";
     }
   } catch (error) {
     console.error(error);
@@ -81,10 +96,20 @@ function formatDay(day) {
   return dayMap[day] ?? String(day);
 }
 
+function resetAverageDisplay() {
+  avgAttendanceEl.textContent = "Attendance Required : -";
+  avgAssignmentsEl.textContent = "Assignments Amount : -";
+  avgExamDifficultyEl.textContent = "Exam Difficulty : -";
+  avgClarityEl.textContent = "Clarity : -";
+  avgInterestEl.textContent = "Interest : -";
+  avgEasyCreditEl.textContent = "Easy Credit : -";
+}
+
 function showError(message) {
   lectureNameEl.textContent = "Error";
   teacherNameEl.textContent = "";
   lectureMetaEl.textContent = "";
+  resetAverageDisplay();
   messageTextEl.textContent = message;
   messageTextEl.classList.add("error");
 }
