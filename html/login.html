@@ -2,10 +2,10 @@
 <!-- 名前入力ボックス，パスワード入力ボックス，新規登録ボタン，ログインボタンの表示 -->
 <!-- 新規登録ボタンを押すとnew_member.htmlへ遷移-->
 <!-- ログインボタンを押して情報があっていたらhome.htmlへ遷移-->
-<!DOCTYPE html>
+<!doctype html>
 <html>
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8" />
         <title></title>
     </head>
     <body>
@@ -13,18 +13,29 @@
         <form id="login_form">
             <p>Email</p>
             <!-- Emailを入力するフォーム -->
-            <input id="login_emailInput" name="email" type="text" autocomplete="email" placeholder="Email" />
+            <input
+                id="login_emailInput"
+                name="email"
+                type="text"
+                autocomplete="email"
+                placeholder="Email"
+            />
 
             <p>Password</p>
             <!-- パスワードを入力するフォーム -->
-            <input id="login_passInput" name="password" type="password" autocomplete="current-password" placeholder="PassWord" />
+            <input
+                id="login_passInput"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                placeholder="PassWord"
+            />
 
             <button id="login_signup_button" type="button">Sign Up</button>
             <button id="login_login_button" type="button">Login</button>
         </form>
 
-        <link rel="icon" href="favicon.ico">
-        <script src="../js_Hikari/login.js"></script>
+        <link rel="icon" href="favicon.ico" />
+        <script src="./js_Hikari/login.js"></script>
     </body>
-    
 </html>
