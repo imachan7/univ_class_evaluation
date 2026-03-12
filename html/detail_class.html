@@ -3,35 +3,37 @@
 <!-- 評価を見るボタンを押すとreview.htmlへ遷移 -->
 <!-- 評価を行うボタンを押すとfeedback.htmlへ遷移 -->
 <!-- 戻るボタンを押すと-->
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="ja">
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8" />
         <title>Class Information</title>
     </head>
 
     <body>
-
         <h1>Class Information</h1>
 
         <!-- ロゴを押すとhome.htmlへ戻る -->
         <a href="home.html">
-            <img src="../images/logo.png" alt="Logo of This App" width="120">
+            <img src="../images/logo.png" alt="Logo of This App" width="120" />
         </a>
 
-        <br><br>
+        <br /><br />
 
         <!-- Backを押すと1つ前のページ（時間割ページなど）に戻る -->
         <a href="period_classes.html">Back</a>
 
-        <hr>
+        <hr />
 
         <!-- 講義情報 -->
         <!-- 授業の詳細情報を表示 -->
-        <h2 id="lectureName">Class Name</h2>
-        <p id="teacherName">Teacher's Name</p>
+        <div class="info-box">
+            <h2 id="lectureName">Loading class name...</h2>
+            <p id="teacherName">Loading teacher name...</p>
+            <p id="lectureMeta" class="muted"></p>
+        </div>
 
-        <hr>
+        <hr />
 
         <!-- ボタンエリア -->
         <a id="reviewLink" href="review.html">
@@ -55,7 +57,6 @@
         <p id="messageText"></p>
 
         <a id="backLink" href="period_classes.html">Back</a>
-
     </body>
 
     <script src="js_Ryota/detail_class.js?v=2"></script>
