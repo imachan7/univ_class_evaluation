@@ -1,7 +1,7 @@
 const API_BASE_URL = "http://localhost:3000";
 
 const params = new URLSearchParams(location.search);
-const lectureId = params.get("id");
+const lectureId = params.get("lecture_id");
 
 const lectureNameEl = document.getElementById("lectureName");
 const teacherNameEl = document.getElementById("teacherName");
