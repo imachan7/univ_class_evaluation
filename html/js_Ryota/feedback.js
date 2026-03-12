@@ -18,7 +18,7 @@ if (backLink) {
 document.getElementById("reviewForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("jwt");
   if (!token) {
     alert("ログインが必要です。");
     window.location.href = "login.html";
