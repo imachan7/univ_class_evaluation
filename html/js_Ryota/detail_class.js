@@ -22,8 +22,8 @@ const backLinkEl = document.getElementById("backLink");
 if (!lectureId) {
   showError("講義IDが指定されていません。URLに ?id=数字 を付けてください。");
 } else {
-  reviewLinkEl.href = `review.html?id=${encodeURIComponent(lectureId)}`;
-  feedbackLinkEl.href = `feedback.html?id=${encodeURIComponent(lectureId)}`;
+  reviewLinkEl.href = `review.html?lecture_id=${encodeURIComponent(lectureId)}`;
+  feedbackLinkEl.href = `feedback.html?lecture_id=${encodeURIComponent(lectureId)}`;
   backLinkEl.href = "period_classes.html";
   loadLectureDetail();
 }
