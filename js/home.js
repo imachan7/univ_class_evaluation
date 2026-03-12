@@ -560,4 +560,12 @@ document.addEventListener("DOMContentLoaded", () => {
   setupCalendarModalNavigation();
   // Load and render timetable data.
   loadCalendarLectures();
+  // Set up logout button.
+  const logoutButton = document.getElementById("logout-button");
+  if (logoutButton instanceof HTMLButtonElement) {
+    logoutButton.addEventListener("click", () => {
+      localStorage.removeItem("jwt");
+      window.location.href = "login.html";
+    });
+  }
 });
