@@ -93,6 +93,15 @@ function formatDay(day) {
     return dayMap[day] ?? String(day);
 }
 
+function resetAverageDisplay() {
+  avgAttendanceEl.textContent = "Attendance Required : -";
+  avgAssignmentsEl.textContent = "Assignments Amount : -";
+  avgExamDifficultyEl.textContent = "Exam Difficulty : -";
+  avgClarityEl.textContent = "Clarity : -";
+  avgInterestEl.textContent = "Interest : -";
+  avgEasyCreditEl.textContent = "Easy Credit : -";
+}
+
 function showError(message) {
     lectureNameEl.textContent = "Error";
     teacherNameEl.textContent = "";
