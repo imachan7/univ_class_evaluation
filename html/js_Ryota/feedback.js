@@ -27,12 +27,12 @@ document.getElementById("reviewForm").addEventListener("submit", async (e) => {
 
   const form = e.target;
   const body = {
-    attendance:      Number(form.eval0.value),
-    assignments:     Number(form.eval1.value),
-    exam_difficulty: Number(form.eval2.value),
-    clarity:         Number(form.eval3.value),
-    interest:        Number(form.eval4.value),
-    easy_credit:     Number(form.eval5.value),
+    attendance:      Number(form.attendance.value),
+    assignments:     Number(form.assignments.value),
+    exam_difficulty: Number(form.exam_difficulty.value),
+    clarity:         Number(form.clarity.value),
+    interest:        Number(form.interest.value),
+    easy_credit:     Number(form.easy_credit.value),
     comment:         form.comment.value.trim() || null,
   };
 
