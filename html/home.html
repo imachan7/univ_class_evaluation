@@ -1,20 +1,154 @@
-<!-- ホーム画面のhtml -->
-<!-- 時間割の表示 -->
-<!-- 時間割上を押すとその時間に存在する授業を確認することができる -->
-<!-- 時間割を押すとperiod_class.htmlへ遷移-->
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charest="utf-8">
-        <title>Home</title>
-    </head>
-    <body>
-        <h1>Schedule</h1>
 
-        <!-- テスト用に生成-->
-        <!-- 時間割は表にして表示？-->
-        <p>Mon</p>
-        <a href="period_classes.html">1</a>
-    </body>
-    
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>COURSE SELECTION SYSTEM</title>
+
+    <link rel="stylesheet" href="../css/calendar_home.css">
+
+    <script>
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const rawTerm = Number(params.get("term"));
+            const normalizedTerm = rawTerm === 1 ? "1" : "0";
+
+            const normalized = new URLSearchParams();
+            normalized.set("term", normalizedTerm);
+            normalized.set("grade", "3");
+
+            if (window.location.search !== `?${normalized.toString()}`) {
+                const url = new URL(window.location.href);
+                url.search = normalized.toString();
+                window.history.replaceState(null, "", url.toString());
+            }
+        })();
+    </script>
+</head>
+
+<body>
+
+    <script src="js_Ryota/auth.js"></script>
+    <header>
+        <h1>COURSE SELECTION SYSTEM</h1>
+
+        <p>Select a day and period to view available lectures.</p>
+
+        <div style="text-align: right;">
+            <button id="logout-button" type="button">Logout</button>
+        </div>
+
+        <div style="text-align: right;">
+            <form id="home-filter-form" aria-label="Department and grade filter">
+
+                <label for="department-select">Department</label>
+                <select id="department-select" name="department" disabled>
+                    <option value="information_engineering" selected>Information Engineering</option>
+                </select>
+
+                <label for="grade-select">Grade</label>
+                <select id="grade-select" name="grade" disabled>
+                    <option value="3" selected>Year 3</option>
+                </select>
+
+                <label for="term-select">Term</label>
+                <select id="term-select" name="term">
+                    <option value="0" selected>Spring Semester</option>
+                    <option value="1">Fall Semester</option>
+                </select>
+
+                <button type="submit">Apply</button>
+            </form>
+        </div>
+
+        <hr>
+    </header>
+
+    <main>
+        <section>
+            <h2>Weekly Timetable</h2>
+
+            <table class="calendar-home" border="1">
+                <caption>Class Schedule</caption>
+
+                <thead>
+                    <tr>
+                        <th scope="col">Period</th>
+                        <th scope="col">Monday</th>
+                        <th scope="col">Tuesday</th>
+                        <th scope="col">Wednesday</th>
+                        <th scope="col">Thursday</th>
+                        <th scope="col">Friday</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <th scope="row">Period 1</th>
+                        <td><a href="period.html?day=monday&period=1">No class selected</a></td>
+                        <td><a href="period.html?day=tuesday&period=1">No class selected</a></td>
+                        <td><a href="period.html?day=wednesday&period=1">No class selected</a></td>
+                        <td><a href="period.html?day=thursday&period=1">No class selected</a></td>
+                        <td><a href="period.html?day=friday&period=1">No class selected</a></td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Period 2</th>
+                        <td><a href="period.html?day=monday&period=2">No class selected</a></td>
+                        <td><a href="period.html?day=tuesday&period=2">No class selected</a></td>
+                        <td><a href="period.html?day=wednesday&period=2">No class selected</a></td>
+                        <td><a href="period.html?day=thursday&period=2">No class selected</a></td>
+                        <td><a href="period.html?day=friday&period=2">No class selected</a></td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Period 3</th>
+                        <td><a href="period.html?day=monday&period=3">No class selected</a></td>
+                        <td><a href="period.html?day=tuesday&period=3">No class selected</a></td>
+                        <td><a href="period.html?day=wednesday&period=3">No class selected</a></td>
+                        <td><a href="period.html?day=thursday&period=3">No class selected</a></td>
+                        <td><a href="period.html?day=friday&period=3">No class selected</a></td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Period 4</th>
+                        <td><a href="period.html?day=monday&period=4">No class selected</a></td>
+                        <td><a href="period.html?day=tuesday&period=4">No class selected</a></td>
+                        <td><a href="period.html?day=wednesday&period=4">No class selected</a></td>
+                        <td><a href="period.html?day=thursday&period=4">No class selected</a></td>
+                        <td><a href="period.html?day=friday&period=4">No class selected</a></td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Period 5</th>
+                        <td><a href="period.html?day=monday&period=5">No class selected</a></td>
+                        <td><a href="period.html?day=tuesday&period=5">No class selected</a></td>
+                        <td><a href="period.html?day=wednesday&period=5">No class selected</a></td>
+                        <td><a href="period.html?day=thursday&period=5">No class selected</a></td>
+                        <td><a href="period.html?day=friday&period=5">No class selected</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="period-modal" class="period-modal" hidden aria-hidden="true">
+            <div class="period-modal__backdrop" data-modal-close="true"></div>
+            <div class="period-modal__card" role="dialog" aria-modal="true" aria-label="Lecture Candidates">
+                <div class="period-modal__header">
+                    <button id="modal-back-button" type="button" aria-label="Close lecture candidates">← Back</button>
+                </div>
+                <p>Please select a class for review and confirmation.</p>
+                <div id="modal-lecture-buttons" class="lecture-buttons"></div>
+            </div>
+        </section>
+    </main>
+
+
+    <script src="../js/home.js?v=20260317"></script>
+</body>
+
 </html>

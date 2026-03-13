@@ -1,21 +1,26 @@
 <!-- 授業評価を確認する画面のhtml -->
-<!-- 戻るボタンを押すと-->
-
 <!DOCTYPE html>
-<html>
+<html lang="ja">
     <head>
-        <meta charest="utf-8">
+        <meta charset="utf-8">
         <title>View Evaluation</title>
     </head>
     <body>
+        <script src="js_Ryota/auth.js"></script>
         <h1>View Evaluation</h1>
-        <!-- ここを押すとhome.htmlへ戻る-->
-        <a href="home.html"><img src="../images/logo.png" alt="Logo of This App"></a>
 
-        <!-- Backを押すと1つ前のページに戻る-->
-        <a href="detail_class.html">Back</a>
-        
-        <p>この授業は...</p>
+        <a href="home.html"><img src="../images/logo.png" alt="Logo of This App" width="120"></a>
+
+        <a id="backLink" href="detail_class.html">Back</a>
+
+        <hr>
+
+        <h2 id="lectureName">Loading...</h2>
+
+        <p id="messageText"></p>
+
+        <div id="evalList"></div>
     </body>
-    
+
+    <script src="js_Ryota/review.js"></script>
 </html>

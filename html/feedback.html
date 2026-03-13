@@ -2,20 +2,99 @@
 <!-- 5段階評価にする -->
  <!-- Postを押すとhome.htmlに戻る-->
 <!DOCTYPE html>
-<html>
+<html lang="ja">
     <head>
         <meta charset="utf-8">
         <title>Evaluate Class</title>
     </head>
     <body>
+        <script src="js_Ryota/auth.js"></script>
         <h1>Evaluate Class</h1>
         <!-- ここを押すとhome.htmlへ戻る-->
-        <a href="home.html"><img src="../images/logo.png" alt="Logo of This App"></a>
+        <a href="home.html"><img src="../images/logo.png" alt="Logo of This App" width="120"></a>
 
         <!-- Backを押すと1つ前のページに戻る-->
-        <a href="detail_class.html">Back</a>
-        <p>ここに評価項目を記載</p>
-        <a href="home.html">Post</a>
+        <a id="backLink" href="detail_class.html">Back</a>
+        <p>評価項目</p>
+
+        <form id="reviewForm">
+
+            <p>
+                出席必要か
+                <select name="attendance">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </p>
+
+            <p>
+                課題は多いか
+                <select name="assignments">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </p>
+
+            <p>
+                テスト・レポートの難しさ
+                <select name="exam_difficulty">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </p>
+
+            <p>
+                わかりやすさ
+                <select name="clarity">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </p>
+
+            <p>
+                面白さ
+                <select name="interest">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </p>
+
+            <p>
+                単位の取りやすさ（総合）
+                <select name="easy_credit">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </p>
+
+            <p>コメント</p>
+
+            <textarea name="comment" rows="4" cols="40"></textarea>
+
+            <br><br>
+
+            <button type="submit">Submit</button>
+
+            </form>
+
+        <script src="js_Ryota/feedback.js"></script>
     </body>
-    
 </html>
