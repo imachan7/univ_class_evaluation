@@ -22,13 +22,32 @@ function back() {
 // Registerボタンを押したときの処理を追加
 // 入力情報をデータベースに追加する処理はここに追加
 function register() {
-    const email = emailInput.value;
-    const password = passwordInput.value;
-    const name = nameInput.value;
-    const nickname = nicknameInput.value;
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+    const name = nameInput.value.trim();
+    const nickname = nicknameInput.value.trim();
     const gradeValue = grade.value;
     const courseValue = course.value;
     const programmingExperienceValue = programmingExperience.value;
+
+    const checks = [
+        { el: emailInput, ok: !!email, label: "Email" },
+        { el: passwordInput, ok: !!password, label: "Password" },
+        { el: nameInput, ok: !!name, label: "Name" },
+        { el: nicknameInput, ok: !!nickname, label: "Nickname" },
+        { el: grade, ok: !!gradeValue, label: "Grade" },
+        { el: course, ok: !!courseValue, label: "Course" },
+        { el: programmingExperience, ok: !!programmingExperienceValue, label: "Programming Experience" },
+    ];
+
+    const missing = checks.filter(c => !c.ok).map(c => c.label);
+    if (missing.length > 0) {
+        const msg = "以下の項目を入力または選択してください:\n・" + missing.join('\n・');
+        alert(msg);
+        const firstMissingEl = checks.find(c => !c.ok).el;
+        try { firstMissingEl.focus(); } catch (e) {}
+        return;
+    }
 
     // テストでコンソール画面に表示
     console.log("email:", email);
