@@ -1,86 +1,82 @@
+const API_BASE_URL = "http://localhost:3000";
+
 const params = new URLSearchParams(location.search);
-const lectureId = params.get("serial_num");
+const lectureId = params.get("lecture_id");
 
-const API = "http://localhost:3000";
-
-const formEl = document.getElementById("evalForm");
-
+// 講義IDがなければ詳細ページへ戻す
 if (!lectureId) {
-    alert("URLに serial_num がありません。例: feedback.html?serial_num=12");
-} else {
-    formEl.addEventListener("submit", async e => {
-        e.preventDefault();
-
-        const form = new FormData(e.target);
-
-        const body = {
-            attendance: Number(form.get("attendance")),
-            assignments: Number(form.get("assignments")),
-            exam_difficulty: Number(form.get("exam_difficulty")),
-            clarity: Number(form.get("clarity")),
-            interest: Number(form.get("interest")),
-            easy_credit: Number(form.get("easy_credit")),
-            comment: String(form.get("comment") ?? "").trim()
-        };
-
-        const values = [
-            body.attendance,
-            body.assignments,
-            body.exam_difficulty,
-            body.clarity,
-            body.interest,
-            body.easy_credit
-        ];
-
-        const invalid = values.some(value =>
-            !Number.isInteger(value) || value < 1 || value > 5
-        );
-
-        if (invalid) {
-            alert("各評価項目は1〜5で入力してください。");
-            return;
-        }
-
-        const token = localStorage.getItem("token");
-
-        if (!token) {
-            alert("評価投稿にはログインが必要です。");
-            return;
-        }
-
-        try {
-            let res = await fetch(`${API}/lectures/${encodeURIComponent(lectureId)}/evals`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                body: JSON.stringify(body)
-            });
-
-            // すでに投稿済みなら PUT で更新
-            if (res.status === 409) {
-                res = await fetch(`${API}/lectures/${encodeURIComponent(lectureId)}/evals`, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
-                    },
-                    body: JSON.stringify(body)
-                });
-            }
-
-            if (res.ok) {
-                alert("Evaluation submitted");
-                location.href = `review.html?serial_num=${encodeURIComponent(lectureId)}`;
-                return;
-            }
-
-            const errorData = await res.json().catch(() => ({}));
-            alert(errorData.message ?? "Failed to submit evaluation");
-        } catch (error) {
-            console.error(error);
-            alert("Network error");
-        }
-    });
+  alert("講義IDが指定されていません。");
+  window.location.href = "detail_class.html";
 }
+
+// Backリンクに講義IDを引き継ぐ
+const backLink = document.getElementById("backLink");
+if (backLink) {
+  backLink.href = `detail_class.html?lecture_id=${encodeURIComponent(lectureId)}`;
+}
+
+document.getElementById("reviewForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const token = localStorage.getItem("jwt");
+  if (!token) {
+    alert("ログインが必要です。");
+    window.location.href = "login.html";
+    return;
+  }
+
+  const form = e.target;
+  const body = {
+    attendance:      Number(form.eval0.value),
+    assignments:     Number(form.eval1.value),
+    exam_difficulty: Number(form.eval2.value),
+    clarity:         Number(form.eval3.value),
+    interest:        Number(form.eval4.value),
+    easy_credit:     Number(form.eval5.value),
+    comment:         form.comment.value.trim() || null,
+  };
+
+  try {
+    const res = await fetch(`${API_BASE_URL}/lectures/${encodeURIComponent(lectureId)}/evals`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    });
+
+    const data = await res.json();
+
+    if (res.status === 409) {
+      // すでに評価済みの場合はPUTで更新
+      const updateRes = await fetch(`${API_BASE_URL}/lectures/${encodeURIComponent(lectureId)}/evals`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify(body),
+      });
+
+      if (!updateRes.ok) {
+        const err = await updateRes.json();
+        throw new Error(err.message);
+      }
+
+      alert("評価を更新しました。");
+      window.location.href = `detail_class.html?lecture_id=${encodeURIComponent(lectureId)}`;
+      return;
+    }
+
+    if (!res.ok) {
+      throw new Error(data.message);
+    }
+
+    alert("評価を送信しました。");
+    window.location.href = `detail_class.html?lecture_id=${encodeURIComponent(lectureId)}`;
+  } catch (err) {
+    console.error(err);
+    alert(`エラー: ${err.message}`);
+  }
+});

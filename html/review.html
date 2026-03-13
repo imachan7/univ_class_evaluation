@@ -1,47 +1,26 @@
 <!-- 授業評価を確認する画面のhtml -->
-<!-- 戻るボタンを押すと-->
-
 <!DOCTYPE html>
 <html lang="ja">
     <head>
-        <meta charest="utf-8">
+        <meta charset="utf-8">
         <title>View Evaluation</title>
     </head>
     <body>
+        <script src="js_Ryota/auth.js"></script>
         <h1>View Evaluation</h1>
-        <!-- ここを押すとhome.htmlへ戻る-->
+
         <a href="home.html"><img src="../images/logo.png" alt="Logo of This App" width="120"></a>
 
-        <!-- Backを押すと1つ前のページに戻る-->
-        <a href="detail_class.html">Back</a>
-        
+        <a id="backLink" href="detail_class.html">Back</a>
 
-        <!-- 追加版 -->
-        <div class="lecture-info">
-            <h2 id="lectureName">Loading class name...</h2>
-            <p id="teacherName">Loading teacher name...</p>
-        </div>
-        
-        <!-- 平均評価 -->
-        <div class="summary-box">
-            <h2>Average Evaluation</h2>
-            <p id="averageAttendance">Attendance Required : -</p>
-            <p id="averageAssignments">Assignments Amount : -</p>
-            <p id="averageExamDifficulty">Exam / Report Difficulty : -</p>
-            <p id="averageClarity">Clarity : -</p>
-            <p id="averageInterest">Interest : -</p>
-            <p id="averageEasyCredit">Easy Credit : -</p>
-        </div>
+        <hr>
 
-        <p>この授業は...</p>
+        <h2 id="lectureName">Loading...</h2>
 
-        <!-- 評価一覧表示エリア -->
-        <div id="evalList">
-            Loading...
-        </div>
+        <p id="messageText"></p>
 
-        <script src="js_Ryota/review.js"></script>
-       
+        <div id="evalList"></div>
     </body>
-    
+
+    <script src="js_Ryota/review.js"></script>
 </html>

@@ -1,169 +1,64 @@
-const params = new URLSearchParams(location.search);
-const lectureId = params.get("serial_num");
+const API_BASE_URL = "http://localhost:3000";
 
-const API = "http://localhost:3000";
+const params = new URLSearchParams(location.search);
+const lectureId = params.get("lecture_id");
 
 const backLink = document.getElementById("backLink");
 const lectureNameEl = document.getElementById("lectureName");
-const teacherNameEl = document.getElementById("teacherName");
+const messageTextEl = document.getElementById("messageText");
 const evalListEl = document.getElementById("evalList");
 
-const averageAttendanceEl = document.getElementById("averageAttendance");
-const averageAssignmentsEl = document.getElementById("averageAssignments");
-const averageExamDifficultyEl = document.getElementById("averageExamDifficulty");
-const averageClarityEl = document.getElementById("averageClarity");
-const averageInterestEl = document.getElementById("averageInterest");
-const averageEasyCreditEl = document.getElementById("averageEasyCredit");
-
 if (!lectureId) {
-
-    lectureNameEl.textContent = "Error";
-    teacherNameEl.textContent = "講義IDが指定されていません。";
-
-    evalListEl.innerHTML =
-        '<p class="error">URLに serial_num がありません。例: review.html?serial_num=12</p>';
-
+  alert("講義IDが指定されていません。");
+  window.location.href = "detail_class.html";
 } else {
-
-    backLink.href = `detail_class.html?serial_num=${encodeURIComponent(lectureId)}`;
-
-    loadPage();
+  backLink.href = `detail_class.html?lecture_id=${encodeURIComponent(lectureId)}`;
+  loadReviews();
 }
 
-async function loadPage() {
-    try {
-
-        await loadLectureInfo();
-        await loadEvals();
-
-    } catch (error) {
-
-        console.error(error);
-
-        evalListEl.innerHTML =
-            '<p class="error">データの取得に失敗しました。</p>';
-    }
-}
-
-async function loadLectureInfo() {
-
-    const res = await fetch(`${API}/lectures/${encodeURIComponent(lectureId)}`);
-
-    if (!res.ok) {
-        throw new Error("講義情報の取得に失敗しました");
+async function loadReviews() {
+  try {
+    // 講義名を取得
+    const lectureRes = await fetch(`${API_BASE_URL}/lectures/${encodeURIComponent(lectureId)}`);
+    if (lectureRes.ok) {
+      const lecture = await lectureRes.json();
+      lectureNameEl.textContent = lecture.lec_name ?? "Lecture";
     }
 
-    const data = await res.json();
+    // 評価一覧を取得
+    const res = await fetch(`${API_BASE_URL}/lectures/${encodeURIComponent(lectureId)}/evals`);
+    if (!res.ok) throw new Error(`取得失敗 (${res.status})`);
 
-    lectureNameEl.textContent = data.lec_name ?? "Class Name";
-    teacherNameEl.textContent = `Teacher : ${data.teacher ?? "-"}`;
+    const evals = await res.json();
 
-    const avg = data.average ?? data.avg ?? null;
-
-    if (avg) {
-
-        averageAttendanceEl.textContent =
-            `Attendance Required : ${formatAverage(avg.attendance)}`;
-
-        averageAssignmentsEl.textContent =
-            `Assignments Amount : ${formatAverage(avg.assignments)}`;
-
-        averageExamDifficultyEl.textContent =
-            `Exam / Report Difficulty : ${formatAverage(avg.exam_difficulty)}`;
-
-        averageClarityEl.textContent =
-            `Clarity : ${formatAverage(avg.clarity)}`;
-
-        averageInterestEl.textContent =
-            `Interest : ${formatAverage(avg.interest)}`;
-
-        averageEasyCreditEl.textContent =
-            `Easy Credit : ${formatAverage(avg.easy_credit)}`;
-
-    }
-}
-
-async function loadEvals() {
-
-    const res =
-        await fetch(`${API}/lectures/${encodeURIComponent(lectureId)}/evals`);
-
-    if (!res.ok) {
-        throw new Error("評価一覧の取得に失敗しました");
+    if (!Array.isArray(evals) || evals.length === 0) {
+      messageTextEl.textContent = "まだ評価がありません。";
+      return;
     }
 
-    const data = await res.json();
+    messageTextEl.textContent = `${evals.length}件の評価`;
 
-    evalListEl.innerHTML = "";
-
-    if (!Array.isArray(data) || data.length === 0) {
-
-        evalListEl.innerHTML =
-            '<p class="empty">まだ評価がありません。</p>';
-
-        return;
-    }
-
-    data.forEach((evaluation, index) => {
-
-        const card = document.createElement("div");
-
-        card.className = "evaluation-card";
-
-        const userGrade = evaluation.user?.grade ?? "-";
-        const userCourse = evaluation.user?.course ?? "-";
-
-        const attendance = evaluation.attendance ?? "-";
-        const assignments = evaluation.assignments ?? "-";
-        const examDifficulty = evaluation.exam_difficulty ?? "-";
-        const clarity = evaluation.clarity ?? "-";
-        const interest = evaluation.interest ?? "-";
-        const easyCredit = evaluation.easy_credit ?? "-";
-
-        const comment = evaluation.comment ?? "";
-
-        card.innerHTML = `
-            <h3>Evaluation ${index + 1}</h3>
-
-            <p><strong>Grade:</strong> ${escapeHtml(String(userGrade))}</p>
-
-            <p><strong>Course:</strong> ${escapeHtml(String(userCourse))}</p>
-
-            <p><strong>Attendance Required:</strong> ${escapeHtml(String(attendance))}</p>
-
-            <p><strong>Assignments Amount:</strong> ${escapeHtml(String(assignments))}</p>
-
-            <p><strong>Exam / Report Difficulty:</strong> ${escapeHtml(String(examDifficulty))}</p>
-
-            <p><strong>Clarity:</strong> ${escapeHtml(String(clarity))}</p>
-
-            <p><strong>Interest:</strong> ${escapeHtml(String(interest))}</p>
-
-            <p><strong>Easy Credit:</strong> ${escapeHtml(String(easyCredit))}</p>
-
-            <p><strong>Comment:</strong></p>
-
-            <div class="comment">${escapeHtml(String(comment))}</div>
-        `;
-
-        evalListEl.appendChild(card);
-    });
-}
-
-function formatAverage(value) {
-
-    if (typeof value !== "number") {
-        return "-";
-    }
-
-    return value.toFixed(2);
+    evalListEl.innerHTML = evals.map((e, i) => `
+      <div style="border:1px solid #ccc; padding:12px; margin:8px 0;">
+        <strong>#${i + 1}</strong>
+        <ul>
+          <li>Attendance Required: ${e.attendance ?? "-"}</li>
+          <li>Assignments Amount: ${e.assignments ?? "-"}</li>
+          <li>Exam / Report Difficulty: ${e.exam_difficulty ?? "-"}</li>
+          <li>Clarity: ${e.clarity ?? "-"}</li>
+          <li>Interest: ${e.interest ?? "-"}</li>
+          <li>Easy Credit: ${e.easy_credit ?? "-"}</li>
+        </ul>
+        ${e.comment ? `<p>Comment: ${escapeHtml(e.comment)}</p>` : ""}
+        <small>${new Date(e.created_at).toLocaleDateString("ja-JP")}</small>
+      </div>
+    `).join("");
+  } catch (err) {
+    console.error(err);
+    messageTextEl.textContent = `エラー: ${err.message}`;
+  }
 }
 
 function escapeHtml(str) {
-    return str
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
