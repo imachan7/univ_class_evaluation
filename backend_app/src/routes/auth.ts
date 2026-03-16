@@ -11,7 +11,8 @@ router.post("/signup", async (req: Request, res: Response) => {
         const { email, password, name } = req.body;
         const grade = Number(req.body.grade);
         const course = Number(req.body.course);
-        const prog_exp = Number(req.body.prog_exp);
+        const prog_exp_raw = Number(req.body.prog_exp);
+        const prog_exp = Number.isInteger(prog_exp_raw) ? prog_exp_raw : 0;
         const isValidGrade = Number.isInteger(grade) && grade >= 1;
         const isValidCourse = Number.isInteger(course) && course >= 1;
 
