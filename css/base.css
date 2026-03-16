@@ -1,0 +1,28 @@
+body{
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    text-align: center;
+}
+
+h1{
+    margin-top: 50px;
+}
+
+form{
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+input{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+button{
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}

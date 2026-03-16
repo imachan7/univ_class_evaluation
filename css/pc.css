@@ -1,0 +1,9 @@
+#login_form{
+    width: 400px;
+    margin: 50px auto;
+}
+
+button{
+    width: 45%;
+    margin: 5px;
+}
