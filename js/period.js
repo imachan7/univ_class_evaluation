@@ -1,5 +1,5 @@
 // period画面が参照するバックエンドAPIのベースURL
-const PERIOD_API_BASE_URL = "http://localhost:3000";
+// API_BASE_URL は config.js で定義
 // home画面から渡したコンテキストを保存しているlocalStorageキー
 const PERIOD_POPUP_CONTEXT_KEY = "periodPopupContext";
 
@@ -324,7 +324,7 @@ async function loadPeriodLectures() {
     });
 
     // 講義候補一覧を取得する
-    const response = await fetch(`${PERIOD_API_BASE_URL}/lectures?${query.toString()}`);
+    const response = await fetch(`${API_BASE_URL}/lectures?${query.toString()}`);
     // HTTP異常時は例外化する
     if (!response.ok) {
       throw new Error(`Failed to fetch lectures: ${response.status}`);

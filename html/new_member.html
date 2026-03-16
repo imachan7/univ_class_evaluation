@@ -3,7 +3,7 @@
 <!-- 登録ボタンの表示，キャンセルボタンの表示 -->
 <!-- 登録ボタンを押すとhome.htmlへ遷移-->
 <!-- キャンセルボタンを押すとlogin.htmlへ遷移-->
-<!DOCTYPE html>
+<!doctype html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -21,18 +21,26 @@
         <p>Email</p>
         <!-- Emailアドレス-->
         <input id="new_member_emailInput" type="text" placeholder="Email" />
-        
+
         <p>Pass Word</p>
         <!-- パスワードを入力するフォーム -->
-        <input id="new_member_passwordInput" type="text" placeholder="Password" />
+        <input
+            id="new_member_passwordInput"
+            type="text"
+            placeholder="Password"
+        />
 
         <p>User Id</p>
         <!-- ユーザIDを入力するフォーム -->
         <input id="new_member_nameInput" type="text" placeholder="Name" />
-        
+
         <p>NickName</p>
         <!-- ニックネームを入力するフォーム -->
-        <input id="new_member_nicknameInput" type="text" placeholder="NickName" />
+        <input
+            id="new_member_nicknameInput"
+            type="text"
+            placeholder="NickName"
+        />
 
         <!-- 学年を選択するフォーム -->
         <p>Grade</p>
@@ -40,7 +48,7 @@
             <option value="">--Select--</option>
             <option value="3">Year 3</option>
         </select>
-        
+
         <!-- 学科を選択するフォーム -->
         <p>Course</p>
         <select id="course" name="course">
@@ -59,11 +67,10 @@
 
         <!-- 前のページ(login.html)に戻るボタン-->
         <button id="new_member_back_button">Back</button>
-        
+
         <!-- 登録ボタン-->
         <button id="new_member_register_button">Register</button>
-        
+
         <script src="./js_Hikari/new_member.js"></script>
     </body>
-    
 </html>
