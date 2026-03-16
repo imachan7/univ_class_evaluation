@@ -1,5 +1,5 @@
 // Expected frontend host name. Keep this as localhost to avoid CORS mismatch.
-const FRONT_EXPECTED_HOST = "localhost";
+// const FRONT_EXPECTED_HOST = "localhost";
 // Backend API base URL.
 // API_BASE_URL は config.js で定義
 // Fixed grade (Information Engineering, Year 3).
@@ -92,15 +92,8 @@ function updateHomeUrl(term) {
  * Usage: call once on DOMContentLoaded.
  */
 function normalizeFrontendHost() {
-  // Do nothing when already on expected host.
-  if (window.location.hostname === FRONT_EXPECTED_HOST) {
-    return;
-  }
-
-  // Build equivalent URL with localhost host.
-  const targetUrl = `${window.location.protocol}//${FRONT_EXPECTED_HOST}:${window.location.port}${window.location.pathname}${window.location.search}${window.location.hash}`;
-  // Redirect to normalized host.
-  window.location.replace(targetUrl);
+  // LAN公開のためリダイレクトを無効化
+  return;
 }
 
 /**
