@@ -1,7 +1,7 @@
 // Expected frontend host name. Keep this as localhost to avoid CORS mismatch.
 const FRONT_EXPECTED_HOST = "localhost";
 // Backend API base URL.
-const API_BASE_URL = "http://localhost:3000";
+// API_BASE_URL は config.js で定義
 // Fixed grade (Information Engineering, Year 3).
 const DEFAULT_GRADE = 3;
 // Default term when URL term is missing/invalid (0 = Spring).
