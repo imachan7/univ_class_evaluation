@@ -3,7 +3,7 @@ name: Build and deploy Node.js app to Azure Web App - univ-class-api
 on:
   push:
     branches:
-      - develop
+      - deploy
   workflow_dispatch:
 
 jobs:
