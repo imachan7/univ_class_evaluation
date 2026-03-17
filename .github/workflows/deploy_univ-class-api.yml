@@ -9,6 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend_app
     permissions:
       contents: read
 
@@ -21,7 +24,6 @@ jobs:
           node-version: '20.x'
 
       - name: npm install and build
-        working-directory: backend_app
         run: |
           npm install
           npm run build
