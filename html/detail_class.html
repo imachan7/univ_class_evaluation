@@ -7,6 +7,10 @@
 <html lang="ja">
     <head>
         <meta charset="utf-8" />
+        <link rel="stylesheet" href="../css/base.css">
+        <link rel="stylesheet" href="../css/mobile.css" media="(max-width:768px)">
+        <link rel="stylesheet" href="../css/pc.css" media="(min-width:769px)">
+    
         <title>Class Information</title>
     </head>
 
@@ -22,7 +26,9 @@
         <br /><br />
 
         <!-- Backを押すと1つ前のページ（時間割ページなど）に戻る -->
-        <a href="period_classes.html">Back</a>
+        <a id="detail_class_back_button" href="home.html">
+            <button>Back</button>
+        </a>
 
         <hr />
 
@@ -57,7 +63,7 @@
 
         <p id="messageText"></p>
 
-        <a id="backLink" href="home.html">Back</a>
+        
     </body>
 
     <script src="../js/config.js"></script>
