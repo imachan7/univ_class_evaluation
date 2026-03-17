@@ -16,7 +16,7 @@ async function login() {
     console.log("password:", password);
 
     try {
-        const res = await fetch(`http://10.3.202.148:5500/auth/login`, {
+        const res = await fetch(`http://10.3.202.148:3000/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password }),

@@ -9,18 +9,20 @@ import usersRouter from "./routes/users";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+
+const PORT: number = process.env.PORT ? Number(process.env.PORT) : 3000;
 
 const allowedOrigins = (process.env.ALLOWED_ORIGINS || "")
   .split(",")
   .map((o) => o.trim())
   .filter((o) => o.length > 0);
-//cors回避のためのコード
+
+// cors回避のためのコード
 app.use(
   cors({
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
-      if (allowedOrigins.length === 0) return callback(null, true); //今はこれなので変えた方が良い
+      if (allowedOrigins.length === 0) return callback(null, true);
       if (allowedOrigins.includes(origin)) return callback(null, true);
       return callback(
         Object.assign(new Error("Not allowed by CORS"), { status: 403 }),
@@ -28,6 +30,7 @@ app.use(
     },
   }),
 );
+
 app.use(express.json());
 
 app.get("/health", (req, res) => {
