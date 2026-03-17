@@ -55,7 +55,7 @@ async function register() {
         }
 
         alert("Registration successful! Please login")
-        window.location.href = "../html/login.html"
+       window.location.href = "../html/login.html"
 
     } catch (err) {
         console.error(err)
