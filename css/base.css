@@ -161,10 +161,7 @@ button {
 }
 
 /* Backボタン */
-#new_member_back_button,
-#feedback_back_button,
-#detail_class_back_button,
-#review_back_button {
+#new_member_back_button{
     width: 100%;
     max-width: 400px;
     padding: 12px;
@@ -236,4 +233,39 @@ hr {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#feedback_back_button,
+#review_back_button,
+#detail_class_back_button {
+    text-decoration: none;
+}
+
+#feedback_back_button button,
+#review_back_button button,
+#detail_class_back_button button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* ホバー時 */
+#feedback_back_button button:hover,
+#review_back_button button:hover,
+#detail_class_back_button button:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+}
+
+/* クリック時 */
+#feedback_back_button button:active,
+#review_back_button button:active,
+#detail_class_back_button button:active {
+    transform: translateY(0);
+    background-color: #222;
 }

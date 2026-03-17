@@ -19,51 +19,48 @@ function back() {
 
 // Registerボタンを押したときの処理を追加
 // 入力情報をデータベースに追加する処理はここに追加
-function register() {
+async function register() {
     const email = emailInput.value.trim()
     const password = passwordInput.value.trim()
     const name = nameInput.value.trim()
-    const nickname = nicknameInput.value.trim()
-    const gradeValue = grade.value
-    const courseValue = course.value
-    const programmingExperienceValue = programmingExperience.value
+    const gradeValue = Number(grade.value)
+    const courseValue = Number(course.value)
+    const progExpValue = Number(programmingExperience.value)
 
-    const checks = [
-        { el: emailInput, ok: !!email, label: "Email" },
-        { el: passwordInput, ok: !!password, label: "Password" },
-        { el: nameInput, ok: !!name, label: "Name" },
-        { el: nicknameInput, ok: !!nickname, label: "Nickname" },
-        { el: grade, ok: !!gradeValue, label: "Grade" },
-        { el: course, ok: !!courseValue, label: "Course" },
-        {
-            el: programmingExperience,
-            ok: !!programmingExperienceValue,
-            label: "Programming Experience",
-        },
-    ]
-
-    const missing = checks.filter((c) => !c.ok).map((c) => c.label)
-    if (missing.length > 0) {
-        const msg =
-            "以下の項目を入力または選択してください:\n・" + missing.join("\n・")
-        alert(msg)
-        const firstMissingEl = checks.find((c) => !c.ok).el
-        try {
-            firstMissingEl.focus()
-        } catch (e) {}
+    if (!email || !password || !name || !gradeValue || !courseValue || !progExpValue) {
+        alert("すべての項目を入力してください")
         return
     }
 
-    // テストでコンソール画面に表示
-    console.log("email:", email)
-    console.log("password:", password)
-    console.log("name:", name)
-    console.log("nickname:", nickname)
-    console.log("grade:", gradeValue)
-    console.log("course:", courseValue)
-    console.log("programming experience:", programmingExperienceValue)
+    try {
+        const res = await fetch("http://10.3.202.148:3000/auth/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+                name: name,
+                grade: gradeValue,
+                course: courseValue,
+                prog_exp: progExpValue, // ←ここ重要
+            }),
+        })
 
-    window.location.href = "../html/home.html"
+        if (!res.ok) {
+            const err = await res.json().catch(() => ({}))
+            alert(err.message || "登録に失敗しました")
+            return
+        }
+
+        alert("登録成功！ログインしてください")
+        //window.location.href = "../html/login.html"
+
+    } catch (err) {
+        console.error(err)
+        alert("サーバーに接続できませんでした")
+    }
 }
 
 new_member_back_button.addEventListener("click", back)
