@@ -55,7 +55,7 @@ async function register() {
         }
 
         alert("登録成功！ログインしてください")
-        //window.location.href = "../html/login.html"
+        window.location.href = "../html/login.html"
 
     } catch (err) {
         console.error(err)
