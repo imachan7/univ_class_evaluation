@@ -44,22 +44,22 @@ async function register() {
                 name: name,
                 grade: gradeValue,
                 course: courseValue,
-                prog_exp: progExpValue, // ←ここ重要
+                prog_exp: progExpValue,
             }),
         })
 
         if (!res.ok) {
             const err = await res.json().catch(() => ({}))
-            alert(err.message || "登録に失敗しました")
+            alert(err.message || "Registration failed")
             return
         }
 
-        alert("登録成功！ログインしてください")
-        //window.location.href = "../html/login.html"
+        alert("Registration successful! Please login")
+        window.location.href = "../html/login.html"
 
     } catch (err) {
         console.error(err)
-        alert("サーバーに接続できませんでした")
+        alert("Could not connect to the server")
     }
 }
 
