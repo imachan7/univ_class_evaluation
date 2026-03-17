@@ -24,24 +24,24 @@ async function login() {
 
         if (!res.ok) {
             const err = await res.json().catch(() => ({}));
-            alert(err.message || 'ログインに失敗しました');
+            alert(err.message || 'Login failed');
             return;
         }
 
         const data = await res.json();
         const token = data.token;
         if (!token) {
-            alert('サーバー応答が不正です');
+            alert('Invalid server response');
             return;
         }
 
         localStorage.setItem('jwt', token);
-        console.log('ログイン成功');
+        console.log('Login successful');
         window.location.href = '../html/home.html';
 
     } catch (err) {
         console.error('Fetch error:', err);
-        alert('サーバーに接続できませんでした');
+        alert('Could not connect to the server');
     }
 }
 
