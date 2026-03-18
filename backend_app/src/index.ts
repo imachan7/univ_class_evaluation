@@ -20,7 +20,12 @@ app.use(
   cors({
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
-      if (allowedOrigins.length === 0) return callback(null, true); //今はこれなので変えた方が良い
+      if (allowedOrigins.length === 0) return callback(null, true);
+      // フロントエンドからのアクセスを許可するためのワイルドカード（開発中のみ）
+      // 本番環境では特定のドメインのみ許可するように変更してください
+      if (process.env.NODE_ENV !== "production" || origin.includes("azurestaticapps.net") || origin.includes("localhost")) {
+          return callback(null, true);
+      }
       if (allowedOrigins.includes(origin)) return callback(null, true);
       return callback(
         Object.assign(new Error("Not allowed by CORS"), { status: 403 }),
