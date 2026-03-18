@@ -30,6 +30,10 @@ app.use(
 );
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("Hello from Univ Class Evaluation API!");
+});
+
 app.get("/health", (req, res) => {
   res.json({ status: "ok" });
 });
