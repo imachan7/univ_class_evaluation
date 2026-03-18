@@ -23,6 +23,9 @@ app.use(
       if (allowedOrigins.length === 0) return callback(null, true);
       // フロントエンドからのアクセスを許可するためのワイルドカード（開発中のみ）
       // 本番環境では特定のドメインのみ許可するように変更してください
+      // 一時的に全てのオリジンを許可して疎通確認を行う
+      return callback(null, true);
+      /*
       if (process.env.NODE_ENV !== "production" || origin.includes("azurestaticapps.net") || origin.includes("localhost")) {
           return callback(null, true);
       }
@@ -30,6 +33,7 @@ app.use(
       return callback(
         Object.assign(new Error("Not allowed by CORS"), { status: 403 }),
       );
+      */
     },
   }),
 );
