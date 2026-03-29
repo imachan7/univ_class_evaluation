@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture Candidates</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        background: #eef2f7;
+      }
+
+      .popup-wrap {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+
+      .popup-card {
+        width: min(880px, 100%);
+        background: #ffffff;
+        border: 1px solid #d4dbe6;
+        border-radius: 14px;
+        box-shadow: 0 14px 30px rgba(15, 23, 42, 0.14);
+        padding: 20px;
+      }
+
+      .popup-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+
+      #back-button {
+        border: 1px solid #bac7db;
+        background: #f3f7ff;
+        color: #0f2f63;
+        border-radius: 8px;
+        padding: 8px 12px;
+        cursor: pointer;
+      }
+
+      #back-button:hover {
+        background: #e8efff;
+      }
+
+      .lecture-buttons {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .lecture-button {
+        display: block;
+        border: 1px solid #bdcae2;
+        background: #f9fbff;
+        color: #0f1f3d;
+        border-radius: 10px;
+        padding: 12px 14px;
+        text-decoration: none;
+        text-align: center;
+      }
+
+      .lecture-button:hover {
+        background: #edf3ff;
+        border-color: #7f97c7;
+      }
+
+      #period-status {
+        margin-top: 12px;
+        color: #41526f;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="popup-wrap">
+      <section class="popup-card" role="dialog" aria-modal="true" aria-label="Lecture Candidates">
+        <div class="popup-header">
+          <button id="back-button" type="button" aria-label="Back and close popup">← Back</button>
+        </div>
+
+        <p>Please select a class for review and confirmation.</p>
+
+        <div id="lecture-buttons" class="lecture-buttons"></div>
+      </section>
+    </main>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/period.js?v=20260315"></script>
+  </body>
+</html>

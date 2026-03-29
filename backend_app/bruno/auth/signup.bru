@@ -1,0 +1,21 @@
+meta {
+  name: ユーザー登録
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/auth/signup
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "test@nitech.ac.jp",
+    "password": "password123",
+    "name": "テストユーザー",
+    "grade": 3,
+    "course": 1
+  }
+}

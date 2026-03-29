@@ -1,0 +1,28 @@
+/* pc.css */
+
+form#login_form {
+    padding: 50px;
+    max-width: 500px;
+}
+
+button {
+    padding: 12px;
+    font-size: 18px;
+}
+
+/* PC用 */
+body {
+    padding-top: 80px; /* 上の余白を広めに */
+}
+
+#new_member_emailInput,
+#new_member_passwordInput,
+#new_member_nameInput,
+#new_member_nicknameInput,
+#grade,
+#course,
+#programming_experience,
+#new_member_back_button,
+#new_member_register_button {
+    max-width: 500px;
+}

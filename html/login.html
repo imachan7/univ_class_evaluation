@@ -2,18 +2,44 @@
 <!-- 名前入力ボックス，パスワード入力ボックス，新規登録ボタン，ログインボタンの表示 -->
 <!-- 新規登録ボタンを押すとnew_member.htmlへ遷移-->
 <!-- ログインボタンを押して情報があっていたらhome.htmlへ遷移-->
-<!DOCTYPE html>
+<!doctype html>
 <html>
     <head>
-        <meta charest="utf-8">
-        <title></title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="../css/base.css">
+        <link rel="stylesheet" href="../css/mobile.css" media="(max-width:768px)">
+        <link rel="stylesheet" href="../css/pc.css" media="(min-width:769px)">
+        <title>Login</title>
     </head>
     <body>
         <h1>COURSE SELECTION SYSTEM</h1>
-        <p>Name</p>
-        <p>Pass Word</p>
-        <a href="new_member.html">NEW MEMBER</a>
-        <a href="home.html">LOGIN</a>
+        <form id="login_form">
+            <p>Email</p>
+            <!-- Emailを入力するフォーム -->
+            <input
+                id="login_emailInput"
+                name="email"
+                type="text"
+                autocomplete="email"
+                placeholder="Email"
+            />
+
+            <p>Password</p>
+            <!-- パスワードを入力するフォーム -->
+            <input
+                id="login_passInput"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                placeholder="PassWord"
+            />
+
+            <button id="login_signup_button" type="button">Sign Up</button>
+            <button id="login_login_button" type="button">Login</button>
+        </form>
+
+        <script src="./js_Hikari/login.js"></script>
     </body>
-    
 </html>

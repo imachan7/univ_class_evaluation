@@ -3,45 +3,69 @@
 <!-- 評価を見るボタンを押すとreview.htmlへ遷移 -->
 <!-- 評価を行うボタンを押すとfeedback.htmlへ遷移 -->
 <!-- 戻るボタンを押すと-->
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="ja">
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="../css/base.css">
+        <link rel="stylesheet" href="../css/mobile.css" media="(max-width:768px)">
+        <link rel="stylesheet" href="../css/pc.css" media="(min-width:769px)">
+    
         <title>Class Information</title>
     </head>
 
     <body>
-
+        <script src="js_Ryota/auth.js"></script>
         <h1>Class Information</h1>
 
         <!-- ロゴを押すとhome.htmlへ戻る -->
         <a href="home.html">
-            <img src="../images/logo.png" alt="Logo of This App" width="120">
+            <img src="../images/logo.png" alt="Logo of This App" width="120" />
         </a>
 
-        <br><br>
+        <br /><br />
 
         <!-- Backを押すと1つ前のページ（時間割ページなど）に戻る -->
-        <a href="period_classes.html">Back</a>
+        <a id="detail_class_back_button" href="home.html">
+            <button>Back</button>
+        </a>
 
-        <hr>
+        <hr />
 
         <!-- 講義情報 -->
         <!-- 授業の詳細情報を表示 -->
-        <h2 id="lectureName">Class Name</h2>
-        <p id="teacherName">Teacher's Name</p>
+        <div class="info-box">
+            <h2 id="lectureName">Loading class name...</h2>
+            <p id="teacherName">Loading teacher name...</p>
+            <p id="lectureMeta" class="muted"></p>
+        </div>
 
-        <hr>
+        <hr />
 
         <!-- ボタンエリア -->
-        <a href="review.html">
+        <a id="reviewLink" href="review.html">
             <button>View Evaluation</button>
         </a>
 
-        <a href="feedback.html">
+        <a id="feedbackLink" href="feedback.html">
             <button>Evaluate Class</button>
         </a>
 
+        <p id="lectureMeta"></p>
+
+        <h3>Average Ratings</h3>
+        <p id="avgAttendance"></p>
+        <p id="avgAssignments"></p>
+        <p id="avgExamDifficulty"></p>
+        <p id="avgClarity"></p>
+        <p id="avgInterest"></p>
+        <p id="avgEasyCredit"></p>
+
+        <p id="messageText"></p>
+
+        
     </body>
-    
+
+    <script src="../js/config.js"></script>
+    <script src="js_Ryota/detail_class.js?v=2"></script>
 </html>

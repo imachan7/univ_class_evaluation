@@ -2,20 +2,110 @@
 <!-- 5段階評価にする -->
  <!-- Postを押すとhome.htmlに戻る-->
 <!DOCTYPE html>
-<html>
+<html lang="ja">
     <head>
         <meta charset="utf-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="../css/base.css">
+        <link rel="stylesheet" href="../css/mobile.css" media="(max-width:768px)">
+        <link rel="stylesheet" href="../css/pc.css" media="(min-width:769px)">
+        
         <title>Evaluate Class</title>
     </head>
     <body>
+        <script src="js_Ryota/auth.js"></script>
         <h1>Evaluate Class</h1>
         <!-- ここを押すとhome.htmlへ戻る-->
-        <a href="home.html"><img src="../images/logo.png" alt="Logo of This App"></a>
+        <a href="home.html"><img src="../images/logo.png" alt="Logo of This App" width="120"></a>
 
         <!-- Backを押すと1つ前のページに戻る-->
-        <a href="detail_class.html">Back</a>
-        <p>ここに評価項目を記載</p>
-        <a href="home.html">Post</a>
+        <a id="feedback_back_button" href="detail_class.html">
+            <button>Back</button>
+        </a>
+
+        <p>Feed Back</p>
+
+        <form id="reviewForm">
+
+            <p>
+                Attendence Required
+                <select name="attendance">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </p>
+
+            <p>
+                Assignments Amount
+                <select name="assignments">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </p>
+
+            <p>
+                Exam/Report Difficulty
+                <select name="exam_difficulty">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </p>
+
+            <p>
+                Clarity
+                <select name="clarity">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </p>
+
+            <p>
+                Interest
+                <select name="interest">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </p>
+
+            <p>
+                Easy Credit
+                <select name="easy_credit">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </p>
+
+            <p>Comment</p>
+
+            <textarea name="comment" rows="4" cols="40"></textarea>
+
+            <br><br>
+
+            <button type="submit">Submit</button>
+
+            </form>
+
+        <script src="../js/config.js"></script>
+        <script src="js_Ryota/feedback.js"></script>
     </body>
-    
 </html>

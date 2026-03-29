@@ -1,0 +1,27 @@
+/* mobile.css */
+
+form#login_form {
+    padding: 20px;
+}
+
+button {
+    width: 100%;
+    margin: 10px 0 0 0; /* 上だけ余白 */
+}
+
+/* モバイル用 */
+body {
+    padding-top: 30px;
+}
+
+#new_member_emailInput,
+#new_member_passwordInput,
+#new_member_nameInput,
+#new_member_nicknameInput,
+#grade,
+#course,
+#programming_experience,
+#new_member_back_button,
+#new_member_register_button {
+    width: 100%; /* フル幅 */
+}

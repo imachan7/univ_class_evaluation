@@ -1,0 +1,271 @@
+/* 共通CSS */
+
+/* 全体のリセット */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* bodyを縦方向に並べる */
+body {
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column; /* 縦方向 */
+    justify-content: flex-start; /* 上から順に配置 */
+    align-items: center; /* 横は中央 */
+    min-height: 100vh;
+    padding-top: 50px; /* 上に余白 */
+}
+
+/* タイトル */
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* フォーム全体 */
+form#login_form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column; /* フォーム内も縦方向 */
+}
+
+/* ラベル */
+p {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* 入力欄 */
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #000;
+}
+
+input::placeholder {
+    color: #999;
+}
+
+/* ボタン縦並び */
+button {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#login_signup_button {
+    background-color: #6c63ff;
+    color: white;
+}
+
+#login_login_button {
+    background-color: #00bfa5;
+    color: white;
+}
+
+
+/* Email */
+#new_member_emailInput {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+/* Password */
+#new_member_passwordInput {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+/* UserId */
+#new_member_nameInput {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+/* NickName */
+#new_member_nicknameInput {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+/* Grade */
+#grade {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+/* Course */
+#course {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+/* Programming Experience */
+#programming_experience {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+/* Backボタン */
+#new_member_back_button{
+    width: 100%;
+    max-width: 400px;
+    padding: 12px;
+    margin: 10px 0;
+    background-color: #aaa;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Registerボタン */
+#new_member_register_button {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px;
+    margin: 10px 0;
+    background-color: #00bfa5;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#logout-button {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+#logout-button:hover {
+    background-color: #e60000;
+}
+
+#submit-button {
+    background-color: #00bfa5;
+    color: white;
+}
+
+/* ロゴ */
+img {
+    margin-bottom: 20px;
+}
+
+/* 区切り線 */
+hr {
+    width: 80%;
+    margin: 20px 0;
+}
+
+/* 授業名 */
+#lectureName {
+    color: #222;
+    margin-bottom: 10px;
+}
+
+/* メッセージ */
+#messageText {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* 評価リスト */
+#evalList {
+    width: 90%;
+    max-width: 600px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#feedback_back_button,
+#review_back_button,
+#detail_class_back_button {
+    text-decoration: none;
+}
+
+#feedback_back_button button,
+#review_back_button button,
+#detail_class_back_button button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* ホバー時 */
+#feedback_back_button button:hover,
+#review_back_button button:hover,
+#detail_class_back_button button:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+}
+
+/* クリック時 */
+#feedback_back_button button:active,
+#review_back_button button:active,
+#detail_class_back_button button:active {
+    transform: translateY(0);
+    background-color: #222;
+}
